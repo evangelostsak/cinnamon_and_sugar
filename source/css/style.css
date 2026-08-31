@@ -1,11 +1,6 @@
-/* ==========================================================================
-   Cinnamon & Sugar — bakery & coffee, Prenzlauer Berg, Berlin
-   Single stylesheet for the whole site.
-   ========================================================================== */
+/* Cinnamon & Sugar — single stylesheet for the whole site. */
 
-/* --------------------------------------------------------------------------
-   1. Design tokens
-   -------------------------------------------------------------------------- */
+/* Design tokens */
 :root {
   /* Palette — warm bakery: cream, crust, cinnamon, caramel */
   --cream:        #fbf5ec;
@@ -41,16 +36,13 @@
   --nav-h: 72px;
 }
 
-/* --------------------------------------------------------------------------
-   2. Reset & base
-   -------------------------------------------------------------------------- */
+/* Reset & base */
 *,
 *::before,
 *::after { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
-  /* keep anchored menu sections clear of the sticky navbar */
   scroll-padding-top: calc(var(--nav-h) + 4.5rem);
 }
 
@@ -92,9 +84,7 @@ p:last-child { margin-bottom: 0; }
   border-radius: 4px;
 }
 
-/* --------------------------------------------------------------------------
-   3. Layout helpers
-   -------------------------------------------------------------------------- */
+/* Layout helpers */
 .shell {
   width: min(100% - 2.5rem, var(--shell));
   margin-inline: auto;
@@ -145,9 +135,7 @@ p:last-child { margin-bottom: 0; }
 }
 .skip-link:focus { left: 0; }
 
-/* --------------------------------------------------------------------------
-   4. Buttons
-   -------------------------------------------------------------------------- */
+/* Buttons */
 .btn {
   --btn-bg: var(--cinnamon);
   --btn-fg: #fff;
@@ -197,9 +185,7 @@ p:last-child { margin-bottom: 0; }
   margin-top: 1.8rem;
 }
 
-/* --------------------------------------------------------------------------
-   5. Sticky navbar (lives in base.html — shared by every page)
-   -------------------------------------------------------------------------- */
+/* Sticky navbar */
 .nav {
   position: sticky;
   top: 0;
@@ -363,9 +349,7 @@ p:last-child { margin-bottom: 0; }
   }
 }
 
-/* --------------------------------------------------------------------------
-   6. Hero
-   -------------------------------------------------------------------------- */
+/* Hero */
 .hero {
   position: relative;
   overflow: hidden;
@@ -444,9 +428,7 @@ p:last-child { margin-bottom: 0; }
   font-size: .92rem;
 }
 
-/* --------------------------------------------------------------------------
-   7. Page banner (interior pages)
-   -------------------------------------------------------------------------- */
+/* Page banner (interior pages) */
 .banner {
   padding-block: clamp(2.75rem, 6vw, 4.5rem);
   background:
@@ -458,9 +440,7 @@ p:last-child { margin-bottom: 0; }
 .banner h1 { margin-bottom: .3em; }
 .banner .lede { max-width: 46rem; }
 
-/* --------------------------------------------------------------------------
-   8. Cards & feature grids
-   -------------------------------------------------------------------------- */
+/* Cards & feature grids */
 .grid {
   display: grid;
   gap: clamp(1rem, 2vw, 1.6rem);
@@ -492,11 +472,9 @@ p:last-child { margin-bottom: 0; }
 .card h3 { margin-bottom: .4em; }
 .card p { color: var(--ink-soft); font-size: .98rem; }
 
-/* --------------------------------------------------------------------------
-   9. Menu items — every item carries a picture placeholder
-   -------------------------------------------------------------------------- */
+/* Menu items */
 
-/* Category jump bar, sticks just under the navbar */
+/* Category jump bar */
 .menu-nav {
   position: sticky;
   top: var(--nav-h);
@@ -570,21 +548,14 @@ p:last-child { margin-bottom: 0; }
   box-shadow: var(--shadow-md);
 }
 
-/* --- the picture placeholder ------------------------------------------- */
 .item-photo {
   position: relative;
-  /* --photo-ratio lets the hero and .frame blocks reuse this placeholder
-     without inheriting the menu card's 3:2 crop. */
   aspect-ratio: var(--photo-ratio, 3 / 2);
   background: var(--cream-deep);
   overflow: hidden;
 }
 
-/*
- * The placeholder is the DEFAULT state and the photo fades in over it once it
- * actually loads (template.js adds .has-photo). Doing it this way round means
- * no flash of empty cards while 51 lazy images resolve.
- */
+/* Placeholder is the default; the photo fades in over it once it loads. */
 .item-photo img {
   width: 100%;
   height: 100%;
@@ -668,9 +639,7 @@ p:last-child { margin-bottom: 0; }
   text-transform: uppercase;
 }
 
-/* --------------------------------------------------------------------------
-   10. Info lists (hours, contact details)
-   -------------------------------------------------------------------------- */
+/* Info lists (hours, contact details) */
 .hours {
   margin: 0;
   border-top: 1px solid var(--line);
@@ -732,9 +701,7 @@ p:last-child { margin-bottom: 0; }
 .detail-list .value a { text-decoration: none; }
 .detail-list .value a:hover { text-decoration: underline; }
 
-/* --------------------------------------------------------------------------
-   11. Split blocks & map
-   -------------------------------------------------------------------------- */
+/* Split blocks & map */
 .split {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -764,9 +731,7 @@ p:last-child { margin-bottom: 0; }
   filter: saturate(.9);
 }
 
-/* --------------------------------------------------------------------------
-   12. Form
-   -------------------------------------------------------------------------- */
+/* Form */
 .form {
   display: grid;
   gap: 1.1rem;
@@ -821,9 +786,7 @@ p:last-child { margin-bottom: 0; }
   color: var(--ink-faint);
 }
 
-/* --------------------------------------------------------------------------
-   13. Call-to-action strip
-   -------------------------------------------------------------------------- */
+/* Call-to-action strip */
 .cta {
   padding-block: clamp(3rem, 6vw, 4.5rem);
   background: var(--cinnamon);
@@ -837,9 +800,7 @@ p:last-child { margin-bottom: 0; }
 .cta .btn--ghost { --btn-fg: #fff; --btn-bd: rgba(255,255,255,.5); }
 .cta .btn--ghost:hover { --btn-bd: #fff; }
 
-/* --------------------------------------------------------------------------
-   14. Footer
-   -------------------------------------------------------------------------- */
+/* Footer */
 .footer {
   padding-block: clamp(2.75rem, 5vw, 4rem) 2rem;
   background: var(--ink);
@@ -888,9 +849,7 @@ p:last-child { margin-bottom: 0; }
   color: rgba(251, 245, 236, .5);
 }
 
-/* --------------------------------------------------------------------------
-   15. Template loader states
-   -------------------------------------------------------------------------- */
+/* Template loader states */
 .tpl-error {
   width: min(100% - 2.5rem, 640px);
   margin: 4rem auto;
