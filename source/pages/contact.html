@@ -1,0 +1,179 @@
+<!-- title: Contact — Cinnamon & Sugar
+     The form has no backend: it opens the visitor's mail client at data-mailto. -->
+
+<section class="banner">
+  <div class="shell">
+    <span class="eyebrow">Say hello</span>
+    <h1>Contact &amp; visit</h1>
+    <p class="lede">
+      Questions about a cake order, a big breakfast delivery, or whether the
+      vanilla bougatsa is still in? Call the shop — it's the fastest way to
+      reach us.
+    </p>
+  </div>
+</section>
+
+<!-- Details + hours -->
+<section class="section">
+  <div class="shell split">
+    <div>
+      <span class="eyebrow">Details</span>
+      <h2>Where to find us</h2>
+
+      <ul class="detail-list">
+        <li>
+          <span class="ico" aria-hidden="true">📍</span>
+          <div>
+            <span class="label">Address</span>
+            <span class="value">
+              <a href="https://www.openstreetmap.org/?mlat=52.5455117&amp;mlon=13.4192466#map=18/52.5455117/13.4192466"
+                 target="_blank" rel="noopener">
+                Lychener Straße 63, 10437 Berlin
+              </a>
+            </span>
+          </div>
+        </li>
+        <li>
+          <span class="ico" aria-hidden="true">📞</span>
+          <div>
+            <span class="label">Phone</span>
+            <span class="value"><a href="tel:+491788488644">+49 178 8488644</a></span>
+          </div>
+        </li>
+        <li>
+          <span class="ico" aria-hidden="true">🛵</span>
+          <div>
+            <span class="label">Delivery</span>
+            <span class="value">
+              <a href="https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar"
+                 target="_blank" rel="noopener">Wolt — delivery &amp; pickup</a>
+            </span>
+          </div>
+        </li>
+        <li>
+          <span class="ico" aria-hidden="true">🗺️</span>
+          <div>
+            <span class="label">Delivery area</span>
+            <span class="value">Roughly 3&nbsp;km around the shop</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <span class="eyebrow">Opening hours</span>
+      <h2>When we're open</h2>
+
+      <dl class="hours">
+        <div class="hours__row hours__row--closed">
+          <dt>Monday</dt><dd>Closed</dd>
+        </div>
+        <div class="hours__row"><dt>Tuesday</dt><dd>08:30 – 17:00</dd></div>
+        <div class="hours__row"><dt>Wednesday</dt><dd>08:30 – 17:00</dd></div>
+        <div class="hours__row"><dt>Thursday</dt><dd>08:30 – 17:00</dd></div>
+        <div class="hours__row"><dt>Friday</dt><dd>08:30 – 18:00</dd></div>
+        <div class="hours__row"><dt>Saturday</dt><dd>09:00 – 18:00</dd></div>
+        <div class="hours__row"><dt>Sunday</dt><dd>09:00 – 18:00</dd></div>
+      </dl>
+
+      <div class="btn-row">
+        <a class="btn" href="tel:+491788488644">Call the shop</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Map -->
+<section class="section section--tight section--paper">
+  <div class="shell">
+    <iframe
+      class="map"
+      title="Map showing Cinnamon &amp; Sugar at Lychener Straße 63, Berlin"
+      loading="lazy"
+      src="https://www.openstreetmap.org/export/embed.html?bbox=13.4132%2C52.5425%2C13.4253%2C52.5485&amp;layer=mapnik&amp;marker=52.5455117%2C13.4192466"></iframe>
+  </div>
+</section>
+
+<!-- Enquiry form -->
+<section class="section section--cream">
+  <div class="shell shell--slim">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">Enquiries</span>
+      <h2>Cakes, catering &amp; everything else</h2>
+      <p class="lede">
+        Ordering a whole karidopita, a breakfast run for the office, or a tray
+        of bougatsa for Sunday? Send us the details.
+      </p>
+    </div>
+
+    <form class="form" id="enquiry-form" data-mailto="hello@cinnamonandsugar.de" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="topic">What's it about?</label>
+        <select id="topic" name="topic">
+          <option>Cake or pastry order</option>
+          <option>Catering / office breakfast</option>
+          <option>Large delivery</option>
+          <option>Feedback</option>
+          <option>Something else</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message"
+                  placeholder="Tell us what you need and when you need it."
+                  required></textarea>
+      </div>
+
+      <div class="btn-row" style="margin-top:.25rem">
+        <button class="btn" type="submit">Send message</button>
+      </div>
+
+      <p class="form__note">
+        This form opens your email app with the message ready to send. For
+        anything urgent, please call <a href="tel:+491788488644">+49 178 8488644</a>.
+      </p>
+    </form>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var form = document.getElementById("enquiry-form");
+    if (!form) return;
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      var data = new FormData(form);
+      var subject = "[" + data.get("topic") + "] Enquiry from " + data.get("name");
+      var body =
+        data.get("message") +
+        "\n\n—\n" +
+        data.get("name") +
+        "\n" +
+        data.get("email");
+
+      window.location.href =
+        "mailto:" + form.dataset.mailto +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+    });
+  })();
+</script>
