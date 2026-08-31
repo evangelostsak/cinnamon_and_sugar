@@ -219,17 +219,9 @@ p:last-child { margin-bottom: 0; }
 }
 
 .brand__mark {
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--cinnamon);
-  color: #fff;
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: -.02em;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
   flex: none;
 }
 
