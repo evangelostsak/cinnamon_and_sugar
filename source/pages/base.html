@@ -1,0 +1,89 @@
+<!-- Shared layout. Placeholders are substituted anywhere they appear, including
+     inside comments — so don't write them in one. -->
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Sticky navbar -->
+<header class="nav" id="site-nav">
+  <div class="shell nav__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">C&amp;S</span>
+      <span>
+        <span class="brand__name">Cinnamon &amp; Sugar</span>
+        <span class="brand__tag">Bakery &amp; Coffee</span>
+      </span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false"
+            aria-controls="nav-menu" aria-label="Toggle navigation menu">
+      <span></span>
+    </button>
+
+    <nav class="nav__menu" id="nav-menu" aria-label="Main">
+      <ul class="nav__links">
+        <li><a class="nav__link" data-nav="index"   href="index.html">Home</a></li>
+        <li><a class="nav__link" data-nav="menu"    href="menu.html">Menu</a></li>
+        <li><a class="nav__link" data-nav="about"   href="about.html">About</a></li>
+        <li><a class="nav__link" data-nav="contact" href="contact.html">Contact</a></li>
+        <li>
+          <a class="btn nav__cta"
+             href="https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar"
+             target="_blank" rel="noopener">Order on Wolt</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Page content -->
+<main id="main">
+  {{content}}
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <span class="brand__name">Cinnamon &amp; Sugar</span>
+        <p>
+          A small bakery and coffee shop in Prenzlauer Berg. Greek bougatsa, fresh
+          bagels, brioche sandwiches and proper freddo espresso — baked and brewed
+          every morning on Lychener Straße.
+        </p>
+      </div>
+
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li>Lychener Straße 63</li>
+          <li>10437 Berlin, Germany</li>
+          <li><a href="tel:+491788488644">+49 178 8488644</a></li>
+          <li>
+            <a href="https://www.openstreetmap.org/?mlat=52.5455117&amp;mlon=13.4192466#map=18/52.5455117/13.4192466"
+               target="_blank" rel="noopener">Open in maps</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Opening hours</h4>
+        <ul>
+          <li>Mon — closed</li>
+          <li>Tue–Thu — 08:30–17:00</li>
+          <li>Fri — 08:30–18:00</li>
+          <li>Sat–Sun — 09:00–18:00</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <span>&copy; {{year}} Cinnamon &amp; Sugar. All rights reserved.</span>
+      <span>
+        Delivery &amp; pickup via
+        <a href="https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar"
+           target="_blank" rel="noopener">Wolt</a>
+      </span>
+    </div>
+  </div>
+</footer>
