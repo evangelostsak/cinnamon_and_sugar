@@ -766,6 +766,159 @@ p:last-child { margin-bottom: 0; }
   color: var(--ink-faint);
 }
 
+/* Order platforms */
+.order-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  box-shadow: var(--shadow-sm);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--caramel);
+  box-shadow: var(--shadow-md);
+  color: var(--ink);
+}
+
+.order-card__mark {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex: none;
+  border-radius: 14px;
+  background: var(--caramel-soft);
+  font-size: 1.4rem;
+}
+
+.order-card__name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.order-card__note {
+  display: block;
+  font-size: .9rem;
+  color: var(--ink-soft);
+}
+
+.order-card__go {
+  margin-left: auto;
+  flex: none;
+  color: var(--cinnamon);
+  font-weight: 700;
+}
+
+/* Social links — Instagram is the active channel, so it gets the fill */
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.social a,
+.social__soon {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem .95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink-soft);
+  font-size: .92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .16s ease, border-color .16s ease, color .16s ease, background .16s ease;
+}
+
+.social a:hover {
+  transform: translateY(-2px);
+  border-color: var(--cinnamon);
+  color: var(--cinnamon);
+}
+
+.social svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  fill: currentColor;
+}
+
+.social--primary a {
+  border-color: transparent;
+  color: #fff;
+  background: linear-gradient(135deg, #f9a03f 0%, #d6336c 45%, #8f3fd6 100%);
+  box-shadow: var(--shadow-sm);
+}
+
+.social--primary a:hover {
+  color: #fff;
+  border-color: transparent;
+  box-shadow: var(--shadow-md);
+}
+
+.social__soon {
+  cursor: default;
+  opacity: .6;
+}
+
+.social__badge {
+  padding: .1rem .45rem;
+  border-radius: 999px;
+  background: var(--cream-deep);
+  color: var(--ink-faint);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* Footer sits on dark ink, so the neutral chips invert.
+   `.footer ul` sets display:grid and outranks `.social`, so restate the row. */
+.footer .social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.footer .social a,
+.footer .social__soon {
+  border-color: rgba(251, 245, 236, .22);
+  background: transparent;
+  color: rgba(251, 245, 236, .86);
+}
+
+.footer .social a:hover {
+  border-color: rgba(251, 245, 236, .55);
+  background: rgba(251, 245, 236, .08);
+  color: #fff;
+}
+
+.footer .social--primary a {
+  border-color: transparent;
+  background: linear-gradient(135deg, #f9a03f 0%, #d6336c 45%, #8f3fd6 100%);
+  color: #fff;
+}
+
+.footer .social__badge {
+  background: rgba(251, 245, 236, .14);
+  color: rgba(251, 245, 236, .7);
+}
+
 /* Call-to-action strip */
 .cta {
   padding-block: clamp(3rem, 6vw, 4.5rem);
@@ -803,17 +956,22 @@ p:last-child { margin-bottom: 0; }
 
 .footer__grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: clamp(1.75rem, 4vw, 3rem);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1000px) {
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .footer__brand { grid-column: 1 / -1; }
 }
 
+@media (max-width: 520px) {
+  .footer__grid { grid-template-columns: 1fr; }
+}
+
 .footer__brand .brand__name { color: var(--cream); }
 .footer__brand p { margin-top: .9rem; max-width: 28rem; }
+.footer__brand .social { margin-top: 1.2rem; }
 
 .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
 
