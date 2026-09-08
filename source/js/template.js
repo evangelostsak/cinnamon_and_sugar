@@ -22,6 +22,7 @@
     "&family=Manrope:wght@400;500;600;700&display=swap";
 
   var dicts = {};
+  var activeDict = {};   // last applied, so the theme toggle can relabel
 
   /* ------------------------------------------------------------------ utils */
 
@@ -95,7 +96,44 @@
     document.head.appendChild(link);
   }
 
+  /* ------------------------------------------------------------------ theme */
+
+  /* The icon is swapped in JS, not CSS, so a stale stylesheet can never leave
+     both glyphs showing. */
+  var ICON = {
+    light: "M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Z",
+    dark: "M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0-6a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1ZM1 12a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H2a1 1 0 0 1-1-1Zm18 0a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1ZM4.22 4.22a1 1 0 0 1 1.41 0l1.42 1.42a1 1 0 0 1-1.42 1.41L4.22 5.64a1 1 0 0 1 0-1.42Zm12.73 12.73a1 1 0 0 1 1.41 0l1.42 1.42a1 1 0 0 1-1.42 1.41l-1.41-1.41a1 1 0 0 1 0-1.42ZM19.78 4.22a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 0 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0ZM7.05 16.95a1 1 0 0 1 0 1.42l-1.42 1.41a1 1 0 0 1-1.41-1.41l1.41-1.42a1 1 0 0 1 1.42 0Z"
+  };
+
+  function currentTheme() {
+    return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  }
+
+  /* The label depends on state, so it is set here rather than via data-i18n. */
+  function labelTheme() {
+    var btn = document.querySelector(".theme-toggle");
+    if (!btn) return;
+    var dark = currentTheme() === "dark";
+    var text = activeDict[dark ? "base.switch-to-light-mode" : "base.switch-to-dark-mode"];
+    btn.setAttribute("aria-pressed", String(dark));
+
+    var path = btn.querySelector(".theme-toggle__icon path");
+    if (path) path.setAttribute("d", dark ? ICON.dark : ICON.light);
+
+    if (text) {
+      btn.setAttribute("aria-label", text);
+      btn.setAttribute("title", text);
+    }
+  }
+
+  function setTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    try { localStorage.setItem("cs-theme", theme); } catch (e) { /* private mode */ }
+    labelTheme();
+  }
+
   function applyI18n(scope, dict, lang) {
+    activeDict = dict;
     /* Dictionary values may carry {{year}} etc., same as the base template. */
     var vars = { year: String(new Date().getFullYear()), page: page };
     var t = function (key) {
@@ -131,6 +169,8 @@
     if (desc && tag) tag.setAttribute("content", desc);
 
     if (lang === "el") loadGreekFonts();
+
+    labelTheme();
 
     scope.querySelectorAll(".lang__btn").forEach(function (btn) {
       var on = btn.dataset.lang === lang;
@@ -170,6 +210,13 @@
     document.querySelectorAll(".lang__btn").forEach(function (btn) {
       btn.addEventListener("click", function () { switchTo(btn.dataset.lang); });
     });
+
+    var theme = document.querySelector(".theme-toggle");
+    if (theme) {
+      theme.addEventListener("click", function () {
+        setTheme(currentTheme() === "dark" ? "light" : "dark");
+      });
+    }
 
     var toggle = document.querySelector(".nav__toggle");
     var menu = document.getElementById("nav-menu");
