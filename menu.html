@@ -13,9 +13,26 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&amp;family=Karla:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="source/css/style.css">
+  <link rel="stylesheet" href="source/css/style.css?v=6">
+
+  <script>
+    /* Set the theme before first paint, so the page never flashes light.
+       Each lookup is guarded separately: a blocked localStorage must not stop
+       the media query, and neither must stop the attribute being set. */
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("cs-theme"); } catch (e) {}
+      if (t !== "dark" && t !== "light") {
+        t = "light";
+        try {
+          if (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
+        } catch (e) {}
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
 </head>
 <body>
-  <script src="source/js/template.js" data-page="menu" data-root="source/"></script>
+  <script src="source/js/template.js?v=6" data-page="menu" data-root="source/"></script>
 </body>
 </html>
