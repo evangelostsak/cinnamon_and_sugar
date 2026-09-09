@@ -64,7 +64,7 @@
   --map-filter:       saturate(.9);
   --photo-filter:     none;
 
-  --nav-h: 72px;
+  --nav-h: 88px;
   color-scheme: light;
 }
 
@@ -296,14 +296,14 @@ p:last-child { margin-bottom: 0; }
 .brand {
   display: flex;
   align-items: center;
-  gap: .7rem;
+  gap: .85rem;
   text-decoration: none;
   color: var(--ink);
 }
 
 .brand__mark {
-  width: 44px;
-  height: 44px;
+  width: 60px;
+  height: 60px;
   object-fit: contain;
   flex: none;
 }
@@ -395,6 +395,9 @@ p:last-child { margin-bottom: 0; }
 .nav__toggle[aria-expanded="true"] span::after  { transform: translateY(-6px) rotate(-45deg); }
 
 @media (max-width: 860px) {
+  :root { --nav-h: 76px; }
+  .brand__mark { width: 52px; height: 52px; }
+
   .nav__toggle { display: block; }
 
   .nav__menu {
@@ -411,16 +414,47 @@ p:last-child { margin-bottom: 0; }
 
   .nav__menu.is-open { display: block; }
 
+  /* Two columns so the language pills and the theme toggle share one row;
+     everything else spans the full width. */
   .nav__links {
-    flex-direction: column;
-    align-items: stretch;
-    gap: .15rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: .15rem .75rem;
   }
 
-  .nav__link { padding: .8rem 1rem; font-size: 1.05rem; }
+  .nav__links > li { grid-column: 1 / -1; }
+
+  .nav__link {
+    padding: .85rem .9rem;
+    border-radius: 12px;
+    font-size: 1.05rem;
+  }
+
+  /* actions sit below a clear gap, aligned to the two edges */
+  .nav__links > li.lang {
+    grid-column: 1;
+    justify-self: start;
+    margin: 1.1rem 0 0;
+    width: auto;
+  }
+
+  .nav__links > li:has(.theme-toggle) {
+    grid-column: 2;
+    justify-self: end;
+    margin-top: 1.1rem;
+  }
+
+  /* the call to action reads as the primary target: full width, last */
+  .nav__links > li:has(.nav__cta) {
+    grid-column: 1 / -1;
+    order: 1;
+    margin-top: .8rem;
+  }
 
   .nav__cta {
-    margin: .75rem 0 0;
+    width: 100%;
+    margin: 0;
     justify-content: center;
   }
 }
@@ -885,7 +919,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 @media (max-width: 860px) {
-  .theme-toggle { margin: .75rem auto 0; }
+  .theme-toggle { margin: 0; }
 }
 
 .theme-toggle svg {
@@ -929,11 +963,6 @@ p:last-child { margin-bottom: 0; }
 }
 
 @media (max-width: 860px) {
-  .lang {
-    margin: .75rem 0 0;
-    justify-content: center;
-    width: 100%;
-  }
   .lang__btn { padding: .5rem .9rem; font-size: .85rem; }
 }
 
