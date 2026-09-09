@@ -306,14 +306,8 @@ p:last-child { margin-bottom: 0; }
   height: 44px;
   object-fit: contain;
   flex: none;
-  mix-blend-mode: multiply;
 }
 
-/* On dark, multiply would erase the artwork — show the tile instead. */
-:root[data-theme="dark"] .brand__mark {
-  mix-blend-mode: normal;
-  border-radius: 10px;
-}
 
 .brand__name {
   font-family: var(--font-display);
