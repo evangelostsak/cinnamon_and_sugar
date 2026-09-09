@@ -109,11 +109,21 @@
     return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
   }
 
-  /* The label depends on state, so it is set here rather than via data-i18n. */
-  function labelTheme() {
+  /* Everything that has to change with the theme: the brand mark (the artwork is
+     dark line work, so dark mode uses a version on a white disc), plus the
+     toggle's icon and label — the label depends on state, so it can't be a
+     plain data-i18n binding. */
+  function paintTheme() {
+    var dark = currentTheme() === "dark";
+
+    var mark = document.querySelector(".brand__mark");
+    if (mark) {
+      var src = dark ? mark.dataset.srcDark : mark.dataset.srcLight;
+      if (src && mark.getAttribute("src") !== src) mark.setAttribute("src", src);
+    }
+
     var btn = document.querySelector(".theme-toggle");
     if (!btn) return;
-    var dark = currentTheme() === "dark";
     var text = activeDict[dark ? "base.switch-to-light-mode" : "base.switch-to-dark-mode"];
     btn.setAttribute("aria-pressed", String(dark));
 
@@ -129,7 +139,7 @@
   function setTheme(theme) {
     document.documentElement.dataset.theme = theme;
     try { localStorage.setItem("cs-theme", theme); } catch (e) { /* private mode */ }
-    labelTheme();
+    paintTheme();
   }
 
   function applyI18n(scope, dict, lang) {
@@ -170,7 +180,7 @@
 
     if (lang === "el") loadGreekFonts();
 
-    labelTheme();
+    paintTheme();
 
     scope.querySelectorAll(".lang__btn").forEach(function (btn) {
       var on = btn.dataset.lang === lang;
