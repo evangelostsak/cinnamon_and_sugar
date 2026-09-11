@@ -114,8 +114,8 @@
   --footer-chip-bd:   rgba(243, 232, 220, .18);
   --footer-chip-fg:   rgba(243, 232, 220, .82);
   --footer-heading:   #f6ece0;
-  --map-filter:       saturate(.75) brightness(.72) contrast(1.06);
-  --photo-filter:     brightness(.72) contrast(1.05);
+  --map-filter:       saturate(.75) brightness(.92) contrast(1.06);
+  --photo-filter:     brightness(.92) contrast(1.05);
   --photo-mat:        #ffffff;   /* dimmed by the slot filter, so same value */
 
   color-scheme: dark;
