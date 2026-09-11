@@ -18,9 +18,7 @@
   <link rel="stylesheet" href="source/css/style.css?v=15">
 
   <script>
-    /* Set the theme before first paint, so the page never flashes light.
-       Each lookup is guarded separately: a blocked localStorage must not stop
-       the media query, and neither must stop the attribute being set. */
+    /* Set the theme before first paint. Each lookup is guarded separately. */
     (function () {
       var t = null;
       try { t = localStorage.getItem("cs-theme"); } catch (e) {}
@@ -33,6 +31,12 @@
       document.documentElement.setAttribute("data-theme", t);
     })();
   </script>
+
+  <!-- Vercel Web Analytics — enable it in the dashboard; 404s on localhost. -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
   <script src="source/js/template.js?v=15" data-page="contact" data-root="source/"></script>

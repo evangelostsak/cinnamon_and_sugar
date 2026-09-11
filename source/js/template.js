@@ -1,6 +1,5 @@
-/* Assembles each page from source/pages/base.html + the page's fragment, then
-   applies the language dictionary from source/i18n/<lang>.json.
-   Needs to be served over HTTP — fetch() can't read file:// URLs. */
+/* Assembles each page from base.html + its fragment and applies the language
+   dictionary. Serve over HTTP: fetch() cannot read file:// URLs. */
 
 (function () {
   "use strict";
@@ -98,8 +97,7 @@
 
   /* ------------------------------------------------------------------ theme */
 
-  /* The icon is swapped in JS, not CSS, so a stale stylesheet can never leave
-     both glyphs showing. */
+  /* Swapped in JS, not CSS, so a stale stylesheet can't show both glyphs. */
   var ICON = {
     light: "M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Z",
     dark: "M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0-6a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1ZM1 12a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H2a1 1 0 0 1-1-1Zm18 0a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1ZM4.22 4.22a1 1 0 0 1 1.41 0l1.42 1.42a1 1 0 0 1-1.42 1.41L4.22 5.64a1 1 0 0 1 0-1.42Zm12.73 12.73a1 1 0 0 1 1.41 0l1.42 1.42a1 1 0 0 1-1.42 1.41l-1.41-1.41a1 1 0 0 1 0-1.42ZM19.78 4.22a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 0 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0ZM7.05 16.95a1 1 0 0 1 0 1.42l-1.42 1.41a1 1 0 0 1-1.41-1.41l1.41-1.42a1 1 0 0 1 1.42 0Z"
@@ -109,10 +107,7 @@
     return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
   }
 
-  /* Everything that has to change with the theme: the brand mark (the artwork is
-     dark line work, so dark mode uses a version on a white disc), plus the
-     toggle's icon and label — the label depends on state, so it can't be a
-     plain data-i18n binding. */
+  /* Brand mark, toggle icon and label — all depend on theme state. */
   function paintTheme() {
     var dark = currentTheme() === "dark";
 
