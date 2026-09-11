@@ -1,2 +1,4 @@
 examples
 .claude
+tests
+node_modules
