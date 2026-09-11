@@ -63,6 +63,7 @@
   --footer-heading:   #fbf5ec;
   --map-filter:       saturate(.9);
   --photo-filter:     none;
+  --photo-mat:        #ffffff;
 
   --nav-h: 88px;
   color-scheme: light;
@@ -114,7 +115,8 @@
   --footer-chip-fg:   rgba(243, 232, 220, .82);
   --footer-heading:   #f6ece0;
   --map-filter:       saturate(.75) brightness(.72) contrast(1.06);
-  --photo-filter:     brightness(.82) contrast(1.05);
+  --photo-filter:     brightness(.72) contrast(1.05);
+  --photo-mat:        #ffffff;   /* dimmed by the slot filter, so same value */
 
   color-scheme: dark;
 }
@@ -663,6 +665,10 @@ p:last-child { margin-bottom: 0; }
   aspect-ratio: var(--photo-ratio, 3 / 2);
   background: var(--cream-deep);
   overflow: hidden;
+  /* Most product shots are white-backed and glare on a dark page. Filtering the
+     slot (not the img) keeps the mat and the photo in step. */
+  filter: var(--photo-filter);
+  transition: filter .2s ease;
 }
 
 /* Placeholder is the default; the photo fades in over it once it loads. */
@@ -671,9 +677,19 @@ p:last-child { margin-bottom: 0; }
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  /* Most product shots have white backgrounds, which glare on a dark page. */
-  filter: var(--photo-filter);
-  transition: opacity .25s ease, filter .2s ease;
+  transition: opacity .25s ease;
+}
+
+/* Menu shots vary from 2:3 to 16:9. One fixed 4:3 slot keeps every card the
+   same shape; the image is contained rather than cropped, and since every photo
+   has a near-white background the mat reads as part of the shot. */
+.menu-item .item-photo {
+  --photo-ratio: 4 / 3;
+  background: var(--photo-mat);
+}
+
+.menu-item .item-photo img {
+  object-fit: contain;
 }
 
 .item-photo.has-photo img { opacity: 1; }
