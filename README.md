@@ -163,6 +163,20 @@ menu fills in late rather than arriving half-empty.
 that emails the shop via [Resend](https://resend.com)'s HTTP API. Replies go
 straight back to the customer, because the mail sets `reply_to` to their address.
 
+The visitor then gets an **automatic acknowledgement**, in whichever of the three
+languages they were reading — "we've got your message, someone will be with you
+shortly" — with the shop's phone number and address. Its `reply_to` is the shop,
+so a reply to the robot still lands somewhere a person reads.
+
+That acknowledgement deliberately **does not quote the visitor's message.** The
+endpoint is public: an email carrying arbitrary text out to an arbitrary address
+from the shop's own domain is how a contact form becomes a spam relay and gets
+the domain blocklisted. Only the name and the topic are echoed, both length-capped
+and HTML-escaped. The shop's copy has the full message.
+
+If the acknowledgement fails, the request still returns `200` — the enquiry is
+already delivered, and that is what matters.
+
 A hidden field catches bots: anything that fills it gets a cheerful `200` and
 nothing is sent.
 
@@ -177,6 +191,25 @@ Set these in **Vercel → Settings → Environment Variables**:
 | `CONTACT_TO` | `bestellung@cinnamon-und-sugar.de` — where enquiries land |
 | `CONTACT_FROM` | `Cinnamon & Sugar <noreply@cinnamon-und-sugar.de>` — a sender verified with Resend |
 | `RESEND_API_KEY` | from the Resend dashboard |
+
+Values are trimmed before use — a newline pasted into the dashboard alongside the
+API key would otherwise make the `Authorization` header invalid, and that failure
+is silent from the outside.
+
+While the domain is unverified you can set `CONTACT_FROM` to
+`Cinnamon & Sugar <onboarding@resend.dev>`, Resend's shared test sender. It only
+delivers to the address on your Resend account — fine for testing, not for
+customers, since the acknowledgement to *them* will not arrive.
+
+When something goes wrong the endpoint says what:
+
+| Response | Meaning |
+| --- | --- |
+| `501 {"missing":[…]}` | those environment variables are not set on this deployment |
+| `502 {"provider":401}` | Resend rejected the API key |
+| `502 {"provider":403}` | sender not allowed — verify the domain |
+| `502 {"provider":422}` | Resend rejected the payload |
+| `502 {"provider":"unreachable"}` | could not reach Resend |
 
 The mailto fallback address lives separately, on the form's `data-mailto`
 attribute in `source/pages/contact.html`.
@@ -237,7 +270,7 @@ Two things do not work off a plain static server, and both are expected:
 - `/_vercel/insights/script.js` returns 404 (analytics is Vercel-side only)
 
 **After changing CSS or JS, bump the `?v=` number** in all four caller pages
-(currently `v=17`). Python's dev server sends no cache headers, so browsers hold
+(currently `v=18`). Python's dev server sends no cache headers, so browsers hold
 on to the old files otherwise.
 
 ## Deploying
