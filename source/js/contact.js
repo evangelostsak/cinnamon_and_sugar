@@ -42,7 +42,8 @@
       email: raw.get("email") || "",
       topic: raw.get("topic") || "",
       message: raw.get("message") || "",
-      company: raw.get("company") || ""     // honeypot
+      company: raw.get("company") || "",    // honeypot
+      lang: document.documentElement.lang || "de"   // reply in the language they wrote in
     };
 
     if (button) { button.disabled = true; button.textContent = ""; }
