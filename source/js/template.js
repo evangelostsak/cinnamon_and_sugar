@@ -141,6 +141,11 @@
     paintTheme();
   }
 
+  /* contact.js needs the live dictionary for its status messages. */
+  window.csTranslate = function (key) {
+    return activeDict[key] == null ? null : activeDict[key];
+  };
+
   function applyI18n(scope, dict, lang) {
     activeDict = dict;
     /* Dictionary values may carry {{year}} etc., same as the base template. */
