@@ -1107,9 +1107,9 @@ p:last-child { margin-bottom: 0; }
 }
 
 .social--instagram { --social-bg: linear-gradient(135deg, #f9a03f 0%, #d6336c 45%, #8f3fd6 100%); }
-.social--facebook  { --social-bg: #1877f2; }
+.social--facebook  { --social-bg: #3936db; }
 /* Core lifted off true black, or the pill vanishes into the dark footer. */
-.social--tiktok    { --social-bg: linear-gradient(115deg, #25f4ee 0%, #262626 38%, #262626 62%, #fe2c55 100%); }
+.social--tiktok    { --social-bg: linear-gradient(115deg, #262626 0%, #262626 38%, #262626 62%, #262626 100%); }
 
 /* Footer is dark in both themes, and outranks `.social` — restate. */
 .footer .social {
