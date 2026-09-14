@@ -1,5 +1,4 @@
 <!-- title: Contact — Cinnamon & Sugar -->
-<!-- The form posts to /api/contact; it falls back to data-mailto if that is not set up. -->
 
 <section class="banner">
   <div class="shell">
@@ -184,8 +183,7 @@
       </p>
     </div>
 
-    <!-- data-mailto is the fallback address, used when /api/contact is not configured.
-     Change it here and set CONTACT_TO in Vercel to the same inbox. -->
+    <!-- data-mailto: fallback inbox when /api/contact is unconfigured. -->
     <form class="form" id="enquiry-form" data-mailto="bestellung@cinnamon-und-sugar.de" novalidate>
       <div class="field-row">
         <div class="field">
@@ -216,7 +214,7 @@
                   required data-i18n-attr="placeholder:contact.tell-us-what-you-need-and"></textarea>
       </div>
 
-      <!-- Bots fill this in; people never see it. -->
+      <!-- Honeypot. -->
       <div class="field field--trap" aria-hidden="true">
         <label for="company">Company</label>
         <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
