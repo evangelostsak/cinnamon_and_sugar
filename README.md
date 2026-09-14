@@ -97,6 +97,24 @@ Environment variables (Vercel, Production + Preview):
 Diagnostics: `501 {"missing":[…]}` — variables absent. `502 {"provider":401}` —
 bad key, `403` — sender not allowed, `422` — payload rejected.
 
+Rate limited to 3 submissions per 10 minutes and 8 per hour per IP, plus a
+per-instance ceiling; over the limit it returns `429`. Counters live in instance
+memory, so this stops ordinary abuse but not a distributed flood — see below.
+
+## Abuse protection
+
+Pages are served from Vercel's CDN and never reach application code, so anything
+beyond the contact form is configured in the dashboard, not here.
+
+- DDoS mitigation is automatic and free on every plan
+- A **challenge** WAF custom rule on `POST /api/contact` stops bots outright and
+  is free on every plan; add a persistent action to block repeat offenders
+- **Attack Challenge Mode** (Firewall tab) is the manual switch if the site is
+  ever under load
+- WAF **rate limiting** is a paid add-on — the in-function limit above covers the
+  common case without it
+- Set a spend limit under Billing so an attack cannot run up a bill
+
 ## Deploy
 
 Vercel, from `main`. Build command `node tools/build.js`, output at the repository
