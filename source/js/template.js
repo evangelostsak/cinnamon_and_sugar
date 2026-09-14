@@ -1,9 +1,6 @@
-/* Page behaviour: language switching, theme toggle, nav and menu photos.
-
-   Pages are prerendered by tools/build.js, so this script only enhances what is
-   already there. If it finds no layout (an unbuilt checkout) it falls back to
-   assembling the page from base.html + its fragment, which needs HTTP: fetch()
-   cannot read file:// URLs. */
+/* Language, theme, nav and menu photos. Pages are prerendered by tools/build.js,
+   so this only enhances them; an unbuilt checkout falls back to assembling from
+   base.html over HTTP. */
 
 (function () {
   "use strict";
@@ -101,7 +98,7 @@
 
   /* ------------------------------------------------------------------ theme */
 
-  /* Swapped in JS, not CSS, so a stale stylesheet can't show both glyphs. */
+  /* Swapped in JS so a stale stylesheet can't show both glyphs. */
   var ICON = {
     light: "M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Z",
     dark: "M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0-6a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1ZM1 12a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H2a1 1 0 0 1-1-1Zm18 0a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1ZM4.22 4.22a1 1 0 0 1 1.41 0l1.42 1.42a1 1 0 0 1-1.42 1.41L4.22 5.64a1 1 0 0 1 0-1.42Zm12.73 12.73a1 1 0 0 1 1.41 0l1.42 1.42a1 1 0 0 1-1.42 1.41l-1.41-1.41a1 1 0 0 1 0-1.42ZM19.78 4.22a1 1 0 0 1 0 1.42l-1.41 1.41a1 1 0 0 1-1.42-1.41l1.42-1.42a1 1 0 0 1 1.41 0ZM7.05 16.95a1 1 0 0 1 0 1.42l-1.42 1.41a1 1 0 0 1-1.41-1.41l1.41-1.42a1 1 0 0 1 1.42 0Z"
@@ -111,7 +108,6 @@
     return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
   }
 
-  /* Brand mark, toggle icon and label — all depend on theme state. */
   function paintTheme() {
     var dark = currentTheme() === "dark";
 
@@ -141,14 +137,13 @@
     paintTheme();
   }
 
-  /* contact.js needs the live dictionary for its status messages. */
+  /* contact.js reads this for its status messages. */
   window.csTranslate = function (key) {
     return activeDict[key] == null ? null : activeDict[key];
   };
 
   function applyI18n(scope, dict, lang) {
     activeDict = dict;
-    /* Dictionary values may carry {{year}} etc., same as the base template. */
     var vars = { year: String(new Date().getFullYear()), page: page };
     var t = function (key) {
       var v = dict[key];
@@ -254,9 +249,8 @@
     });
   }
 
-  /* CSS shows a placeholder by default; only reveal an image that really loads. */
-  /* A dropped request on a phone must not cost the photo permanently, so retry
-     with backoff before giving up and falling back to the placeholder. */
+  /* CSS shows a placeholder until a photo really loads. Retry first: a dropped
+     request on a phone must not cost the picture permanently. */
   var PHOTO_RETRIES = 3;
 
   function watchPhoto(img) {
@@ -270,7 +264,7 @@
       if (tries > PHOTO_RETRIES) { img.remove(); return; }
       var src = img.getAttribute("src").split("#")[0];
       setTimeout(function () {
-        img.setAttribute("src", src + "#retry" + tries);   // same file, fresh request
+        img.setAttribute("src", src + "#retry" + tries);
       }, tries * 700);
     };
 
@@ -286,7 +280,7 @@
   function initPhotos() {
     document.querySelectorAll(".item-photo img").forEach(watchPhoto);
 
-    /* Coming back online is the moment stalled photos can succeed. */
+    /* Back online is when stalled photos can succeed. */
     window.addEventListener("online", function () {
       document.querySelectorAll(".item-photo:not(.has-photo) img").forEach(function (img) {
         var src = img.getAttribute("src").split("#")[0];
@@ -295,7 +289,7 @@
     });
   }
 
-  /* innerHTML doesn't run <script> tags, so recreate any the fragment carries. */
+  /* innerHTML doesn't run <script>, so recreate them. */
   function runInlineScripts(scope) {
     scope.querySelectorAll("script").forEach(function (old) {
       var fresh = document.createElement("script");
@@ -324,13 +318,11 @@
 
   var lang = pickLang();
 
-  /* tools/build.js bakes the layout into each page, so normally there is nothing
-     to assemble — wire up behaviour and let i18n correct the labels. The fetch
-     path stays as a fallback for an unbuilt checkout. */
+  /* Prerendered: wire up behaviour, let i18n correct the labels. */
   function enhance() {
     initNav();
     initPhotos();
-    paintTheme();          // don't wait on the dictionary to fix the dark logo
+    paintTheme();          // don't wait on the dictionary for the dark logo
     dictFor(lang)
       .then(function (dict) { applyI18n(document.body, dict, lang); })
       .catch(function () { /* prerendered content already stands on its own */ });
