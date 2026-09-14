@@ -1,5 +1,9 @@
-/* Assembles each page from base.html + its fragment and applies the language
-   dictionary. Serve over HTTP: fetch() cannot read file:// URLs. */
+/* Page behaviour: language switching, theme toggle, nav and menu photos.
+
+   Pages are prerendered by tools/build.js, so this script only enhances what is
+   already there. If it finds no layout (an unbuilt checkout) it falls back to
+   assembling the page from base.html + its fragment, which needs HTTP: fetch()
+   cannot read file:// URLs. */
 
 (function () {
   "use strict";
@@ -246,19 +250,43 @@
   }
 
   /* CSS shows a placeholder by default; only reveal an image that really loads. */
-  function initPhotos() {
-    document.querySelectorAll(".item-photo img").forEach(function (img) {
-      var frame = img.closest(".item-photo");
-      var reveal = function () { if (frame) frame.classList.add("has-photo"); };
-      var discard = function () { img.remove(); };
+  /* A dropped request on a phone must not cost the photo permanently, so retry
+     with backoff before giving up and falling back to the placeholder. */
+  var PHOTO_RETRIES = 3;
 
-      if (img.complete) {
-        if (img.naturalWidth > 0) reveal();
-        else discard();
-      } else {
-        img.addEventListener("load", reveal, { once: true });
-        img.addEventListener("error", discard, { once: true });
-      }
+  function watchPhoto(img) {
+    var frame = img.closest(".item-photo");
+    var tries = 0;
+
+    var reveal = function () { if (frame) frame.classList.add("has-photo"); };
+
+    var onError = function () {
+      tries++;
+      if (tries > PHOTO_RETRIES) { img.remove(); return; }
+      var src = img.getAttribute("src").split("#")[0];
+      setTimeout(function () {
+        img.setAttribute("src", src + "#retry" + tries);   // same file, fresh request
+      }, tries * 700);
+    };
+
+    img.addEventListener("load", reveal);
+    img.addEventListener("error", onError);
+
+    if (img.complete) {
+      if (img.naturalWidth > 0) reveal();
+      else onError();
+    }
+  }
+
+  function initPhotos() {
+    document.querySelectorAll(".item-photo img").forEach(watchPhoto);
+
+    /* Coming back online is the moment stalled photos can succeed. */
+    window.addEventListener("online", function () {
+      document.querySelectorAll(".item-photo:not(.has-photo) img").forEach(function (img) {
+        var src = img.getAttribute("src").split("#")[0];
+        img.setAttribute("src", src + "#online" + Date.now());
+      });
     });
   }
 
@@ -291,30 +319,52 @@
 
   var lang = pickLang();
 
-  Promise.all([get(BASE_URL), get(PAGE_URL), dictFor(lang)])
-    .then(function (parts) {
-      var base = parts[0], content = parts[1], dict = parts[2];
+  /* tools/build.js bakes the layout into each page, so normally there is nothing
+     to assemble — wire up behaviour and let i18n correct the labels. The fetch
+     path stays as a fallback for an unbuilt checkout. */
+  function enhance() {
+    initNav();
+    initPhotos();
+    paintTheme();          // don't wait on the dictionary to fix the dark logo
+    dictFor(lang)
+      .then(function (dict) { applyI18n(document.body, dict, lang); })
+      .catch(function () { /* prerendered content already stands on its own */ });
+  }
 
-      document.title = readTitle(content);
-      document.body.innerHTML = fill(base, {
-        content: content,
-        page: page,
-        year: String(new Date().getFullYear())
-      });
+  function assemble() {
+    return Promise.all([get(BASE_URL), get(PAGE_URL), dictFor(lang)])
+      .then(function (parts) {
+        var base = parts[0], content = parts[1], dict = parts[2];
 
-      /* Synchronous, so the browser never paints the untranslated markup. */
-      applyI18n(document.body, dict, lang);
+        document.title = readTitle(content);
+        document.body.innerHTML = fill(base, {
+          content: content,
+          page: page,
+          year: String(new Date().getFullYear())
+        });
 
-      initNav();
-      initPhotos();
-      runInlineScripts(document.body);
+        applyI18n(document.body, dict, lang);
+        initNav();
+        initPhotos();
+        runInlineScripts(document.body);
+      })
+      .catch(showError);
+  }
 
+  if (document.querySelector(".nav")) {
+    enhance();
+    if (window.location.hash) {
+      var target = document.querySelector(window.location.hash);
+      if (target) target.scrollIntoView();
+    }
+    document.body.dataset.page = page;
+  } else {
+    assemble().then(function () {
       if (window.location.hash) {
-        var target = document.querySelector(window.location.hash);
-        if (target) target.scrollIntoView();
+        var t = document.querySelector(window.location.hash);
+        if (t) t.scrollIntoView();
       }
-
       document.body.dataset.page = page;
-    })
-    .catch(showError);
+    });
+  }
 })();
