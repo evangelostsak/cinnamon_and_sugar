@@ -1,23 +1,13 @@
-/* Sends the enquiry form as an email. Runs as a Vercel Function — no packages,
-   just fetch() against the mail provider's HTTP API.
-
-   Configure these in Vercel → Settings → Environment Variables:
-     CONTACT_TO       where enquiries land, e.g. bestellung@cinnamon-und-sugar.de
-     CONTACT_FROM     verified sender, e.g. "Cinnamon & Sugar <noreply@cinnamon-und-sugar.de>"
-     RESEND_API_KEY   from resend.com
-
-   Until they are set this replies 501 and the page falls back to opening the
-   visitor's mail app, so the form never dead-ends. */
+/* Emails the enquiry form via Resend. Needs CONTACT_TO, CONTACT_FROM and
+   RESEND_API_KEY; without them it replies 501 and the page falls back to the
+   visitor's mail app. */
 
 "use strict";
 
 const LIMITS = { name: 120, email: 200, topic: 120, message: 4000 };
 
-/* Acknowledgement sent back to the visitor, in the language they wrote in.
-   It deliberately does NOT quote their message: the endpoint is public, and an
-   email carrying attacker-supplied text out to an arbitrary address from the
-   shop's own domain is how a contact form becomes a spam relay and gets the
-   domain blocklisted. Name and topic are echoed; both are length-capped. */
+/* Reply to the visitor. Never quotes their message: this endpoint is public, and
+   mailing arbitrary text to arbitrary addresses would make it a spam relay. */
 const ACK = {
   de: {
     subject: "Wir haben deine Nachricht erhalten",
@@ -81,8 +71,7 @@ module.exports = async function handler(req, res) {
   const body = await readBody(req);
   if (!body) return res.status(400).json({ error: "bad-json" });
 
-  /* Hidden field no person can see. A filled one is a bot: accept and drop it,
-     so the bot has nothing to learn from the response. */
+  /* Honeypot. Accept and drop, so the bot learns nothing. */
   if (clean(body.company, 50)) return res.status(200).json({ ok: true });
 
   const name = clean(body.name, LIMITS.name);
@@ -95,8 +84,7 @@ module.exports = async function handler(req, res) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))
     return res.status(400).json({ error: "bad-email" });
 
-  /* Trim: a value pasted into the dashboard often carries a trailing newline,
-     and one in the API key makes the Authorization header invalid. */
+  /* Trim: a pasted newline in the key breaks the Authorization header. */
   const env = n => (process.env[n] || "").trim();
   const to = env("CONTACT_TO");
   const from = env("CONTACT_FROM");
@@ -119,7 +107,7 @@ module.exports = async function handler(req, res) {
   try {
     const sent = await send({
       to: [to],
-      reply_to: [email],        // hitting reply answers the customer, not the robot
+      reply_to: [email],
       subject: `[${topic}] ${name}`,
       text,
       html
@@ -128,8 +116,6 @@ module.exports = async function handler(req, res) {
     if (!sent.ok) {
       const detail = (await sent.text()).slice(0, 500);
       console.error("resend " + sent.status + ": " + detail);
-      /* The provider's status is enough to tell 401 (key) from 403 (unverified
-         sender) from 422 (bad payload) without opening the logs. */
       return res.status(502).json({ error: "send-failed", provider: sent.status });
     }
   } catch (err) {
@@ -137,8 +123,7 @@ module.exports = async function handler(req, res) {
     return res.status(502).json({ error: "send-failed", provider: "unreachable" });
   }
 
-  /* The enquiry is already safely delivered. A failed acknowledgement is worth
-     a log line, never an error the visitor sees. */
+  /* Enquiry is already delivered; a failed reply is a log line, not an error. */
   try {
     const ack = ACK[lang];
     const firstName = name.split(/\s+/)[0];
@@ -157,7 +142,7 @@ module.exports = async function handler(req, res) {
 
     const acked = await send({
       to: [email],
-      reply_to: [to],           // a reply to the robot reaches the shop
+      reply_to: [to],
       subject: `${ack.subject} — ${SHOP.name}`,
       text: ackText,
       html: ackHtml
