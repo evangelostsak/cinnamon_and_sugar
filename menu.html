@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="source/css/style.css?v=18">
 
   <script>
-    /* Set the theme before first paint. Each lookup is guarded separately. */
+    /* Set the theme before first paint. */
     (function () {
       var t = null;
       try { t = localStorage.getItem("cs-theme"); } catch (e) {}
@@ -32,12 +32,12 @@
     })();
   </script>
 
-  <!-- Vercel Web Analytics — enable it in the dashboard; 404s on localhost. -->
+  <!-- Vercel Web Analytics; 404s on localhost. -->
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <!-- build:content -->
-<!-- Shared layout. Never write a placeholder inside a comment: it gets substituted. -->
+<!-- Shared layout. Placeholders inside comments get substituted too — avoid. -->
 
 <a class="skip-link" href="#main" data-i18n="base.skip-to-content">Zum Inhalt springen</a>
 
