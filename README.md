@@ -21,7 +21,8 @@ brewed every morning on Lychener Straße.
 
 |  |  |
 | --- | --- |
-| **Address** | Lychener Straße 63, 10437 Berlin ||
+| **Address** | Lychener Straße 63, 10437 Berlin |
+| **Phone** | [+49 30 65863658](tel:+493065863658) |
 | **Hours** | Mon closed · Tue–Thu 08:00–17:00 · Fri 08:00–18:00 · Sat–Sun 09:00–18:00 |
 | **Order** | [Wolt](https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar) · [Uber Eats](https://www.ubereats.com/de-en/store/coffee-%26-bakery-cinnamon-and-sugar/b0k5kIpiRRClQ3yqFfLjxg) |
 | **Follow** | [Instagram](https://www.instagram.com/greek_coffee_bakery/) · [Facebook](https://www.facebook.com/p/Cinnamon-and-Sugar-100090695405160/) · [TikTok](https://www.tiktok.com/@cinnamon.and.suga8) |
@@ -31,31 +32,48 @@ brewed every morning on Lychener Straße.
 Four pages — home, menu, about, contact — carrying the full **60-item menu across
 8 sections**, in **three languages**, with a **dark mode**.
 
-**No build step, no dependencies, no backend, no database.** Plain HTML, one CSS
-file and one 325-line vanilla-JS file. Point any static host at the repository
-root and it deploys.
+No framework, no package manager, no database. Plain HTML, one stylesheet, two
+small vanilla-JS files, and a 161-line Node script that stitches the pages
+together at deploy time. The only server-side code is a single function that
+emails the contact form.
 
 ## How it works
 
-Each page at the root is a thin *caller* — it sets the `<title>`, loads the
-stylesheet, and names its content fragment:
+Pages are **prerendered**. `tools/build.js` takes the shared layout, drops each
+page's content into it, applies the German dictionary, and writes the finished
+HTML into the four files at the repository root:
 
-```html
-<script src="source/js/template.js?v=15" data-page="menu" data-root="source/"></script>
+```
+source/pages/base.html  +  source/pages/menu.html  +  source/i18n/de.json
+                            ↓  node tools/build.js
+                        menu.html
 ```
 
-`template.js` then fetches `source/pages/base.html` (the shared navbar and
-footer), fetches the page's own fragment, substitutes the `content` / `page` /
-`year` placeholders, injects the result, and applies the language dictionary —
-all before the first paint, so nothing flashes.
+The output goes between `<!-- build:content -->` markers, so rebuilding replaces
+it rather than nesting it.
 
-The practical upshot: **the navbar and footer live in exactly one file.** Change
-`base.html` and all four pages follow.
+What arrives in the browser is therefore a complete, readable page — no
+JavaScript required to see the menu. `template.js` then *enhances* it: language
+switching, the theme toggle, the mobile nav, and menu photos. If it never runs,
+the site still works.
+
+The practical upshot is unchanged: **the navbar and footer live in exactly one
+file.** Edit `source/pages/base.html`, run the build, and all four pages follow.
+
+> `template.js` keeps its old `fetch()`-based assembly as a fallback, for the
+> case where someone opens an unbuilt checkout. On a built page that path never
+> runs.
 
 ## Structure
 
 ```
-index.html  menu.html  about.html  contact.html   ← callers (title, meta, canonical)
+index.html  menu.html  about.html  contact.html   ← generated; do not hand-edit the body
+
+api/
+  contact.js       Vercel Function — emails the enquiry form
+
+tools/
+  build.js         the prerenderer (no dependencies)
 
 source/
   pages/
@@ -65,19 +83,27 @@ source/
     about.html     page content only
     contact.html   page content only
   css/style.css    the whole stylesheet — 107 design tokens at the top
-  js/template.js   assembles pages, runs i18n, theme and photo logic
+  js/
+    template.js    language, theme, nav and photo behaviour
+    contact.js     the enquiry form
   i18n/
-    de.json        185 keys — the default language
-    en.json        185 keys — also the fallback for any missing key
-    el.json        185 keys
+    de.json        188 keys — the default language
+    en.json        188 keys — also the fallback for any missing key
+    el.json        188 keys
   images/
     logo.png       navbar mark, transparent
     logo-dark.png  navbar mark for dark mode, on a cream disc
-    favicon.jpg    browser tab icon
+    favicon.png    browser tab icon
     shopfront.jpg  home hero
     bakery.jpg     about page
-    menu/          one photo per menu item
+    menu/          one photo per menu item (60)
+
+vercel.json        build command, redirects, security headers, caching
 ```
+
+The four root pages **are** build output, but they are committed. That keeps the
+repository deployable by any plain static host, and means a failed build never
+takes the site down.
 
 ## Features
 
@@ -88,9 +114,10 @@ German is the default; English and Greek are one tap away. Language comes from
 
 Text carries `data-i18n` (plain text), `data-i18n-html` (the few strings with
 inline `<em>`/`<strong>`) or `data-i18n-attr` (alt text, aria-labels,
-placeholders). Each dictionary layers over English, so a missing key degrades to
-English rather than blanking the page. `<html lang>`, `<title>` and the meta
-description all switch too.
+placeholders). The build applies German to the HTML but **leaves the attributes
+in place**, so switching at runtime still works. Each dictionary layers over
+English, so a missing key degrades to English rather than blanking the page.
+`<html lang>`, `<title>` and the meta description all switch too.
 
 **Menu item names and descriptions are deliberately untranslated** — they carry
 no key at all, so they stay exactly as the shop writes them, mixed German and
@@ -105,7 +132,8 @@ paint, from `localStorage` or the visitor's OS preference, so the page never
 flashes light.
 
 Photos are dimmed in dark mode via `--photo-filter`, since product shots on white
-backgrounds glare against a dark page.
+backgrounds glare against a dark page. The navbar logo swaps to a variant on a
+cream disc, so the mark keeps its own background instead of dissolving.
 
 ### Menu photos
 
@@ -119,11 +147,60 @@ Freddo Espresso 0,3 l  →  source/images/menu/freddo-espresso-0-3-l.jpg
 
 Lowercase, accents flattened (`ö`→`o`, `ß`→`ss`), non-alphanumerics collapsed to
 hyphens. While a file is missing the card shows a striped "Photo coming soon"
-placeholder; `template.js` swaps it for the real image once it loads.
+placeholder.
 
 Slots are a fixed **4:3** and images are *contained*, never cropped — so tall
 bottle shots stay whole. Since every photo has a near-white background, the
 letterboxing reads as part of the shot.
+
+A photo that fails to load is **retried three times with backoff**, and again
+when the browser reports it is back online. On a flaky mobile connection the
+menu fills in late rather than arriving half-empty.
+
+### Contact form
+
+`source/js/contact.js` posts the enquiry to `/api/contact`, a Vercel Function
+that emails the shop via [Resend](https://resend.com)'s HTTP API. Replies go
+straight back to the customer, because the mail sets `reply_to` to their address.
+
+A hidden field catches bots: anything that fills it gets a cheerful `200` and
+nothing is sent.
+
+**If the function is not configured, the form falls back** to opening the
+visitor's mail app with the message ready — the same behaviour the site had
+before. The enquiry never dead-ends.
+
+Set these in **Vercel → Settings → Environment Variables**:
+
+| Variable | Example |
+| --- | --- |
+| `CONTACT_TO` | `bestellung@cinnamon-und-sugar.de` — where enquiries land |
+| `CONTACT_FROM` | `Cinnamon & Sugar <noreply@cinnamon-und-sugar.de>` — a sender verified with Resend |
+| `RESEND_API_KEY` | from the Resend dashboard |
+
+The mailto fallback address lives separately, on the form's `data-mailto`
+attribute in `source/pages/contact.html`.
+
+## Security headers
+
+`vercel.json` sets a Content-Security-Policy plus `X-Content-Type-Options`,
+`X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, HSTS and
+`Cross-Origin-Opener-Policy` on every response.
+
+The policy allows **no inline scripts except one**: the theme script in each
+`<head>`, which must run before first paint. It is permitted by SHA-256 hash, and
+`tools/build.js` recomputes that hash on every build:
+
+- if the hash in `vercel.json` is stale, the build **rewrites it and exits 1**
+- Vercel reads `vercel.json` *before* running the build, so a fix only takes
+  effect on the next deploy — the non-zero exit is what stops a broken policy
+  from shipping silently
+
+So if you edit the theme script: run `node tools/build.js`, commit the updated
+`vercel.json`, and deploy.
+
+Everything else the page needs is same-origin, except Google Fonts
+(`fonts.googleapis.com` / `fonts.gstatic.com`) and the OpenStreetMap embed.
 
 ## Editing
 
@@ -135,34 +212,53 @@ letterboxing reads as part of the shot.
 | Colours, spacing, fonts, dark palette | the tokens at the top of `source/css/style.css` |
 | Menu items | `source/pages/menu.html` |
 | Menu photos | add files to `source/images/menu/` |
+| Where enquiries are emailed | the `CONTACT_TO` environment variable |
 
 Adding a menu item means one `<article class="menu-item">` block — copy a
 neighbour and change the name, description and image path.
 
+**Then run `node tools/build.js`** and commit the regenerated root pages.
+
 ## Running locally
 
-Pages are assembled with `fetch()`, which browsers block on `file://`. Serve the
-folder over HTTP rather than double-clicking:
-
 ```bash
+node tools/build.js                 # regenerate the four root pages
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000>. If you do open it from the filesystem, the
-page prints that instruction instead of failing silently.
+Then open <http://localhost:8000>.
 
-**After changing CSS or JS, bump the `?v=` number** in all four caller pages.
-Python's dev server sends no cache headers, so browsers hold on to the old files
-otherwise. Production is unaffected — Vercel revalidates HTML.
+`node tools/build.js --check` reports stale output without writing anything —
+useful before committing.
+
+Two things do not work off a plain static server, and both are expected:
+
+- `/api/contact` returns 404, so the form falls back to the mail app
+- `/_vercel/insights/script.js` returns 404 (analytics is Vercel-side only)
+
+**After changing CSS or JS, bump the `?v=` number** in all four caller pages
+(currently `v=17`). Python's dev server sends no cache headers, so browsers hold
+on to the old files otherwise.
 
 ## Deploying
 
 Hosted on **Vercel**, served from `cinnamon-und-sugar.de`.
 
-- **Build command:** none
-- **Publish directory:** repository root
-- **Runtime:** none
+| | |
+| --- | --- |
+| **Build command** | `node tools/build.js` |
+| **Output directory** | repository root |
+| **Functions** | `api/contact.js` (Node) |
+| **Analytics** | Vercel Web Analytics, via the script tag in each `<head>` |
 
 DNS: an `A` record on the apex plus a `CNAME` on `www`, both pointing at
 Vercel. Both hostnames serve production directly, and every page carries a
 `rel="canonical"` pointing at the bare domain so search engines index one URL.
+
+`vercel.json` also keeps a temporary redirect from `/defaultsite` to `/`, so
+visitors whose browsers cached the old registrar landing page — which carried a
+meta-refresh to that path — self-heal instead of hitting a 404.
+
+## Credits
+
+Designed, built and maintained by **Evangelos Tsakoudis**.
