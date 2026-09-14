@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="source/css/style.css?v=18">
 
   <script>
-    /* Set the theme before first paint. Each lookup is guarded separately. */
+    /* Set the theme before first paint. */
     (function () {
       var t = null;
       try { t = localStorage.getItem("cs-theme"); } catch (e) {}
@@ -32,12 +32,12 @@
     })();
   </script>
 
-  <!-- Vercel Web Analytics — enable it in the dashboard; 404s on localhost. -->
+  <!-- Vercel Web Analytics; 404s on localhost. -->
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <!-- build:content -->
-<!-- Shared layout. Never write a placeholder inside a comment: it gets substituted. -->
+<!-- Shared layout. Placeholders inside comments get substituted too — avoid. -->
 
 <a class="skip-link" href="#main" data-i18n="base.skip-to-content">Zum Inhalt springen</a>
 
@@ -89,7 +89,6 @@
 <!-- Page content -->
 <main id="main">
   <!-- title: Contact — Cinnamon & Sugar -->
-<!-- The form posts to /api/contact; it falls back to data-mailto if that is not set up. -->
 
 <section class="banner">
   <div class="shell">
@@ -259,8 +258,7 @@
       <p class="lede" data-i18n="contact.ordering-a-whole-karidopita-a-breakfast">Eine ganze Karidopita, ein Frühstück fürs Büro oder ein Blech Bougatsa für Sonntag? Schreib uns die Details.</p>
     </div>
 
-    <!-- data-mailto is the fallback address, used when /api/contact is not configured.
-     Change it here and set CONTACT_TO in Vercel to the same inbox. -->
+    <!-- data-mailto: fallback inbox when /api/contact is unconfigured. -->
     <form class="form" id="enquiry-form" data-mailto="bestellung@cinnamon-und-sugar.de" novalidate>
       <div class="field-row">
         <div class="field">
@@ -291,7 +289,7 @@
                   required data-i18n-attr="placeholder:contact.tell-us-what-you-need-and"></textarea>
       </div>
 
-      <!-- Bots fill this in; people never see it. -->
+      <!-- Honeypot. -->
       <div class="field field--trap" aria-hidden="true">
         <label for="company">Company</label>
         <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
