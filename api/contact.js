@@ -6,6 +6,51 @@
 
 const LIMITS = { name: 120, email: 200, topic: 120, message: 4000 };
 
+/* Rate limit. Serverless has no shared store, so this counts per warm instance:
+   it blunts the ordinary case (one bot hammering the form) but is not a hard
+   guarantee across a distributed flood. The WAF rule in front of /api/contact is
+   what handles that — see README. */
+const WINDOWS = [
+  { ms: 10 * 60 * 1000, max: 3 },     // 3 per 10 minutes from one address
+  { ms: 60 * 60 * 1000, max: 8 }      // 8 per hour
+];
+const GLOBAL = { ms: 60 * 60 * 1000, max: 60 };
+const hits = new Map();
+let global = [];
+
+function clientIp(req) {
+  const h = req.headers || {};
+  const fwd = h["x-vercel-forwarded-for"] || h["x-real-ip"] || h["x-forwarded-for"] || "";
+  return String(fwd).split(",")[0].trim() || "unknown";
+}
+
+/* Returns seconds to wait, or 0 when the request is allowed. */
+function throttle(ip) {
+  const now = Date.now();
+  const longest = WINDOWS[WINDOWS.length - 1].ms;
+
+  global = global.filter(t => now - t < GLOBAL.ms);
+  if (global.length >= GLOBAL.max) return Math.ceil(GLOBAL.ms / 1000);
+
+  let seen = (hits.get(ip) || []).filter(t => now - t < longest);
+  for (const w of WINDOWS) {
+    const inWindow = seen.filter(t => now - t < w.ms);
+    if (inWindow.length >= w.max) {
+      hits.set(ip, seen);
+      return Math.ceil((w.ms - (now - inWindow[0])) / 1000);
+    }
+  }
+
+  seen.push(now);
+  hits.set(ip, seen);
+  global.push(now);
+
+  if (hits.size > 5000) {               // keep the map from growing without bound
+    for (const [k, v] of hits) if (!v.some(t => now - t < longest)) hits.delete(k);
+  }
+  return 0;
+}
+
 /* Reply to the visitor. Never quotes their message: this endpoint is public, and
    mailing arbitrary text to arbitrary addresses would make it a spam relay. */
 const ACK = {
@@ -66,6 +111,12 @@ module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "method-not-allowed" });
+  }
+
+  const wait = throttle(clientIp(req));
+  if (wait) {
+    res.setHeader("Retry-After", String(wait));
+    return res.status(429).json({ error: "rate-limited", retryAfter: wait });
   }
 
   const body = await readBody(req);
