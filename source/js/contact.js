@@ -1,6 +1,5 @@
-/* Contact form. Posts to /api/contact, which emails the shop. If that endpoint
-   is missing or not configured yet, falls back to opening the visitor's mail
-   app so the form still gets the message through. */
+/* Contact form. Posts to /api/contact; falls back to the visitor's mail app if
+   that endpoint is missing or unconfigured. */
 
 (function () {
   "use strict";
@@ -43,7 +42,7 @@
       topic: raw.get("topic") || "",
       message: raw.get("message") || "",
       company: raw.get("company") || "",    // honeypot
-      lang: document.documentElement.lang || "de"   // reply in the language they wrote in
+      lang: document.documentElement.lang || "de"
     };
 
     if (button) { button.disabled = true; button.textContent = ""; }
@@ -63,8 +62,6 @@
               "Thanks — we've got your message and will reply soon.", "ok");
           return;
         }
-        /* 501 means the mail provider isn't wired up yet; 404 means the function
-           isn't deployed. Either way the visitor should not lose their message. */
         if (res.status === 501 || res.status === 404) throw new Error("fallback");
         return res.json().catch(function () { return {}; }).then(function (out) {
           say("contact.that-didn-t-go-through-please",
