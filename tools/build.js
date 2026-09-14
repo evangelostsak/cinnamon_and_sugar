@@ -1,10 +1,6 @@
 #!/usr/bin/env node
-/* Prerenders each page: base.html + fragment + the German dictionary, written
-   into the caller HTML. template.js still runs, but only to switch language,
-   theme and photos — the page itself no longer depends on it.
-
-   Run:  node tools/build.js          (writes the caller pages)
-         node tools/build.js --check  (fails if the output is stale) */
+/* Prerenders each page from base.html + fragment + the German dictionary.
+   --check fails on stale output instead of writing. */
 
 "use strict";
 
@@ -33,8 +29,8 @@ function fill(template, values) {
     Object.prototype.hasOwnProperty.call(values, key) ? values[key] : whole);
 }
 
-/* Apply a dictionary the same way template.js does, but on the HTML string.
-   The data-i18n attributes stay in the output so runtime switching still works. */
+/* Same as template.js, on the HTML string. Attributes stay, so runtime switching
+   still works. */
 function localise(html, dict, vars) {
   const t = key => (dict[key] == null ? null : fill(dict[key], vars));
 
@@ -81,8 +77,7 @@ function buildPage(page, base, dict) {
   let caller = read(ROOT, page + ".html");
   const block = OPEN + "\n" + body + "\n" + CLOSE;
 
-  // the shell must agree with the prerendered language, for crawlers and for
-  // anyone whose JavaScript never runs
+  // the shell must agree with the prerendered language
   caller = caller.replace(/<html lang="[^"]*"/, '<html lang="' + DEFAULT_LANG + '"');
 
   const title = dict["meta.title." + page];
@@ -100,11 +95,8 @@ function buildPage(page, base, dict) {
   return caller.replace(/(<body[^>]*>)/, "$1\n" + block);
 }
 
-/* Every inline <script> must be listed in the CSP by hash, so the policy and the
-   pages cannot drift apart silently. Vercel reads vercel.json before it runs this
-   build, so a hash fixed here only takes effect on the *next* deploy — hence the
-   non-zero exit, which fails the deploy loudly instead of shipping a page whose
-   theme script the browser refuses to run. */
+/* Inline scripts are allowed by hash. Vercel reads vercel.json before this runs,
+   so a fix here lands on the next deploy — hence the non-zero exit. */
 function inlineHashes(pages) {
   const seen = new Set();
   for (const html of pages)
