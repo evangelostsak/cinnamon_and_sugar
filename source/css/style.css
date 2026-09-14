@@ -895,6 +895,32 @@ p:last-child { margin-bottom: 0; }
   color: var(--ink-faint);
 }
 
+/* Spam trap: off-screen rather than display:none, which some bots skip. */
+.field--trap {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.form__status {
+  margin: .9rem 0 0;
+  padding: .7rem .95rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: .92rem;
+  font-weight: 600;
+}
+
+.form__status[data-tone="busy"] { color: var(--ink-soft); }
+.form__status[data-tone="ok"]   { border-color: #4f9d69; color: #2f7a49; background: rgba(79, 157, 105, .1); }
+.form__status[data-tone="bad"]  { border-color: #c0574e; color: #b0453c; background: rgba(192, 87, 78, .1); }
+
+:root[data-theme="dark"] .form__status[data-tone="ok"]  { color: #8fd6a6; }
+:root[data-theme="dark"] .form__status[data-tone="bad"] { color: #f0a49c; }
+
 /* Review prompt */
 .review-line {
   margin: 1.75rem 0 0;
@@ -1067,18 +1093,25 @@ p:last-child { margin-bottom: 0; }
   fill: currentColor;
 }
 
-.social--primary a {
+/* Each network wears its own colour; the hover is the same lift for all three. */
+.social--brand a {
   border-color: transparent;
   color: #fff;
-  background: linear-gradient(135deg, #f9a03f 0%, #d6336c 45%, #8f3fd6 100%);
+  background: var(--social-bg);
   box-shadow: var(--shadow-sm);
 }
 
-.social--primary a:hover {
+.social--brand a:hover {
   color: #fff;
   border-color: transparent;
   box-shadow: var(--shadow-md);
 }
+
+.social--instagram { --social-bg: linear-gradient(135deg, #f9a03f 0%, #d6336c 45%, #8f3fd6 100%); }
+.social--facebook  { --social-bg: #1877f2; }
+/* TikTok's core is black; on the dark footer it needs to sit just above the
+   background or the pill loses its shape. */
+.social--tiktok    { --social-bg: linear-gradient(115deg, #25f4ee 0%, #262626 38%, #262626 62%, #fe2c55 100%); }
 
 /* Footer is dark in both themes; `.footer ul` outranks `.social`, so restate. */
 .footer .social {
@@ -1099,9 +1132,16 @@ p:last-child { margin-bottom: 0; }
   color: var(--ink);
 }
 
-.footer .social--primary a {
+/* `.footer .social a` outranks `.social--brand a`, so restate at equal weight. */
+.footer .social--brand a {
   border-color: transparent;
-  background: linear-gradient(135deg, #f9a03f 0%, #d6336c 45%, #8f3fd6 100%);
+  background: var(--social-bg);
+  color: #fff;
+}
+
+.footer .social--brand a:hover {
+  border-color: transparent;
+  background: var(--social-bg);
   color: #fff;
 }
 
