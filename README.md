@@ -1,168 +1,126 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="source/images/logo-dark.png">
-    <img src="source/images/logo.png" alt="Cinnamon &amp; Sugar — Greek Coffee Bakery" width="300">
+    <img src="source/images/logo.png" alt="Cinnamon &amp; Sugar" width="220">
   </picture>
 </p>
 
 <h1 align="center">Cinnamon &amp; Sugar</h1>
 
 <p align="center">
-  A small family-run Greek bakery and coffee shop in Prenzlauer Berg, Berlin.<br>
+  Family-run Greek bakery and coffee shop in Prenzlauer Berg, Berlin.<br>
   <a href="https://cinnamon-und-sugar.de"><strong>cinnamon-und-sugar.de</strong></a>
 </p>
 
 ---
 
-## The shop
-
-Bougatsa, fresh bagels, brioche sandwiches and proper freddo espresso — baked and
-brewed every morning on Lychener Straße.
-
-|  |  |
+| | |
 | --- | --- |
-| **Address** | Lychener Straße 63, 10437 Berlin ||
+| **Address** | Lychener Straße 63, 10437 Berlin |
+| **Phone** | +49 30 65863658 |
 | **Hours** | Mon closed · Tue–Thu 08:00–17:00 · Fri 08:00–18:00 · Sat–Sun 09:00–18:00 |
 | **Order** | [Wolt](https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar) · [Uber Eats](https://www.ubereats.com/de-en/store/coffee-%26-bakery-cinnamon-and-sugar/b0k5kIpiRRClQ3yqFfLjxg) |
 | **Follow** | [Instagram](https://www.instagram.com/greek_coffee_bakery/) · [Facebook](https://www.facebook.com/p/Cinnamon-and-Sugar-100090695405160/) · [TikTok](https://www.tiktok.com/@cinnamon.and.suga8) |
 
-## The site
-
-Four pages — home, menu, about, contact — carrying the full **60-item menu across
-8 sections**, in **three languages**, with a **dark mode**.
-
-**No build step, no dependencies, no backend, no database.** Plain HTML, one CSS
-file and one 325-line vanilla-JS file. Point any static host at the repository
-root and it deploys.
-
-## How it works
-
-Each page at the root is a thin *caller* — it sets the `<title>`, loads the
-stylesheet, and names its content fragment:
-
-```html
-<script src="source/js/template.js?v=15" data-page="menu" data-root="source/"></script>
-```
-
-`template.js` then fetches `source/pages/base.html` (the shared navbar and
-footer), fetches the page's own fragment, substitutes the `content` / `page` /
-`year` placeholders, injects the result, and applies the language dictionary —
-all before the first paint, so nothing flashes.
-
-The practical upshot: **the navbar and footer live in exactly one file.** Change
-`base.html` and all four pages follow.
+Four static pages, 60 menu items, German / English / Greek, dark mode. No
+framework and no database; the only server-side code emails the contact form.
 
 ## Structure
 
 ```
-index.html  menu.html  about.html  contact.html   ← callers (title, meta, canonical)
+index.html  menu.html  about.html  contact.html   ← build output, committed
+
+api/contact.js     emails the enquiry form
+tools/build.js     the prerenderer
+vercel.json        build command, headers, redirects
 
 source/
-  pages/
-    base.html      shared layout: sticky navbar + footer   ← edit once
-    index.html     page content only
-    menu.html      page content only (all 60 items)
-    about.html     page content only
-    contact.html   page content only
-  css/style.css    the whole stylesheet — 107 design tokens at the top
-  js/template.js   assembles pages, runs i18n, theme and photo logic
-  i18n/
-    de.json        185 keys — the default language
-    en.json        185 keys — also the fallback for any missing key
-    el.json        185 keys
-  images/
-    logo.png       navbar mark, transparent
-    logo-dark.png  navbar mark for dark mode, on a cream disc
-    favicon.jpg    browser tab icon
-    shopfront.jpg  home hero
-    bakery.jpg     about page
-    menu/          one photo per menu item
+  pages/base.html  shared navbar + footer   ← edit once, all pages follow
+  pages/*.html     page content
+  css/style.css    design tokens at the top
+  js/template.js   language, theme, nav, photos
+  js/contact.js    the enquiry form
+  i18n/*.json      de (default) · en (fallback) · el
+  images/menu/     one photo per item
 ```
 
-## Features
+`tools/build.js` renders `base.html` + each fragment + the German dictionary into
+the four root pages, between `<!-- build:content -->` markers. `template.js` only
+enhances the result, so the site works without JavaScript.
 
-### Three languages
-
-German is the default; English and Greek are one tap away. Language comes from
-`?lang=de|en|el`, then `localStorage`, then the browser's own setting.
-
-Text carries `data-i18n` (plain text), `data-i18n-html` (the few strings with
-inline `<em>`/`<strong>`) or `data-i18n-attr` (alt text, aria-labels,
-placeholders). Each dictionary layers over English, so a missing key degrades to
-English rather than blanking the page. `<html lang>`, `<title>` and the meta
-description all switch too.
-
-**Menu item names and descriptions are deliberately untranslated** — they carry
-no key at all, so they stay exactly as the shop writes them, mixed German and
-English. That's by construction, not by discipline.
-
-### Dark mode
-
-A moon button at the right of the navbar. The whole palette is tokenised, so the
-theme is a token swap on `:root[data-theme="dark"]` — a warm near-black rather
-than pure black. An inline script in each `<head>` sets the theme before first
-paint, from `localStorage` or the visitor's OS preference, so the page never
-flashes light.
-
-Photos are dimmed in dark mode via `--photo-filter`, since product shots on white
-backgrounds glare against a dark page.
-
-### Menu photos
-
-Every item has a picture slot. Drop a file into `source/images/menu/` named after
-the item's slug and it appears — no HTML change:
-
-```
-Bougatsa-Feta          →  source/images/menu/bougatsa-feta.jpg
-Freddo Espresso 0,3 l  →  source/images/menu/freddo-espresso-0-3-l.jpg
-```
-
-Lowercase, accents flattened (`ö`→`o`, `ß`→`ss`), non-alphanumerics collapsed to
-hyphens. While a file is missing the card shows a striped "Photo coming soon"
-placeholder; `template.js` swaps it for the real image once it loads.
-
-Slots are a fixed **4:3** and images are *contained*, never cropped — so tall
-bottle shots stay whole. Since every photo has a near-white background, the
-letterboxing reads as part of the shot.
-
-## Editing
-
-| To change… | Edit |
-| --- | --- |
-| Navbar, footer, opening hours | `source/pages/base.html` |
-| A page's text | `source/pages/<page>.html` |
-| Any wording, in any language | `source/i18n/<lang>.json` |
-| Colours, spacing, fonts, dark palette | the tokens at the top of `source/css/style.css` |
-| Menu items | `source/pages/menu.html` |
-| Menu photos | add files to `source/images/menu/` |
-
-Adding a menu item means one `<article class="menu-item">` block — copy a
-neighbour and change the name, description and image path.
-
-## Running locally
-
-Pages are assembled with `fetch()`, which browsers block on `file://`. Serve the
-folder over HTTP rather than double-clicking:
+## Commands
 
 ```bash
+node tools/build.js            # rebuild the root pages
+node tools/build.js --check    # report stale output, write nothing
 python3 -m http.server 8000
 ```
 
-Then open <http://localhost:8000>. If you do open it from the filesystem, the
-page prints that instruction instead of failing silently.
+Run the build after editing anything under `source/pages/` or `source/i18n/`, and
+commit the result. Bump `?v=` in the four callers after editing CSS or JS.
 
-**After changing CSS or JS, bump the `?v=` number** in all four caller pages.
-Python's dev server sends no cache headers, so browsers hold on to the old files
-otherwise. Production is unaffected — Vercel revalidates HTML.
+Locally `/api/contact` and Vercel Analytics both 404; the form falls back to the
+visitor's mail app.
 
-## Deploying
+## Editing
 
-Hosted on **Vercel**, served from `cinnamon-und-sugar.de`.
+| To change | Edit |
+| --- | --- |
+| Navbar, footer, hours | `source/pages/base.html` |
+| Page text | `source/pages/<page>.html` |
+| Wording in any language | `source/i18n/<lang>.json` |
+| Colours, spacing, dark palette | tokens at the top of `source/css/style.css` |
+| Menu items | `source/pages/menu.html` |
+| Menu photos | add to `source/images/menu/` |
 
-- **Build command:** none
-- **Publish directory:** repository root
-- **Runtime:** none
+Menu item names and descriptions carry no `data-i18n` key — they stay exactly as
+written, in any language.
 
-DNS: an `A` record on the apex plus a `CNAME` on `www`, both pointing at
-Vercel. Both hostnames serve production directly, and every page carries a
-`rel="canonical"` pointing at the bare domain so search engines index one URL.
+Photos are matched by slug: lowercase, accents flattened, non-alphanumerics to
+hyphens. `Freddo Espresso 0,3 l` → `freddo-espresso-0-3-l.jpg`. Missing files show
+a placeholder.
+
+## Contact form
+
+Posts to `/api/contact`, which sends via [Resend](https://resend.com) and replies
+to the visitor with a confirmation in their language. Unconfigured, it returns 501
+and the form falls back to the mail app.
+
+Environment variables (Vercel, Production + Preview):
+
+| | |
+| --- | --- |
+| `CONTACT_TO` | where enquiries land |
+| `CONTACT_FROM` | verified Resend sender |
+| `RESEND_API_KEY` | |
+
+Diagnostics: `501 {"missing":[…]}` — variables absent. `502 {"provider":401}` —
+bad key, `403` — sender not allowed, `422` — payload rejected.
+
+Rate limited to 3 submissions per 10 minutes and 8 per hour per IP, plus a
+per-instance ceiling; over the limit it returns `429`. Counters live in instance
+memory, so this stops ordinary abuse but not a distributed flood — see below.
+
+## Abuse protection
+
+Pages are served from Vercel's CDN and never reach application code, so anything
+beyond the contact form is configured in the dashboard, not here.
+
+- DDoS mitigation is automatic and free on every plan
+- A **challenge** WAF custom rule on `POST /api/contact` stops bots outright and
+  is free on every plan; add a persistent action to block repeat offenders
+- **Attack Challenge Mode** (Firewall tab) is the manual switch if the site is
+  ever under load
+- WAF **rate limiting** is a paid add-on — the in-function limit above covers the
+  common case without it
+- Set a spend limit under Billing so an attack cannot run up a bill
+
+## Deploy
+
+Vercel, from `main`. Build command `node tools/build.js`, output at the repository
+root. `vercel.json` sets a CSP plus the usual security headers; inline scripts are
+allowed by hash, and the build fails if that hash is stale.
+
+---
+
+Built and maintained by Evangelos Tsakoudis.

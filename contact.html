@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Contact — Cinnamon &amp; Sugar</title>
-  <meta name="description" content="Find Cinnamon &amp; Sugar, a small family-run bakery, at Lychener Straße 63, 10437 Berlin. Opening hours, phone number, map and delivery info.">
+  <title>Kontakt — Cinnamon &amp; Sugar</title>
+  <meta name="description" content="Cinnamon &amp; Sugar, kleine familiengeführte Bäckerei in der Lychener Straße 63, 10437 Berlin. Öffnungszeiten, Telefonnummer, Karte und Lieferinfos.">
 
   <link rel="canonical" href="https://cinnamon-und-sugar.de/contact.html">
 
-  <link rel="icon" type="image/jpeg" href="source/images/favicon.jpg">
+  <link rel="icon" type="image/png" href="source/images/favicon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&amp;family=Karla:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="source/css/style.css?v=15">
+  <link rel="stylesheet" href="source/css/style.css?v=19">
 
   <script>
-    /* Set the theme before first paint. Each lookup is guarded separately. */
+    /* Set the theme before first paint. */
     (function () {
       var t = null;
       try { t = localStorage.getItem("cs-theme"); } catch (e) {}
@@ -32,13 +32,374 @@
     })();
   </script>
 
-  <!-- Vercel Web Analytics — enable it in the dashboard; 404s on localhost. -->
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
+  <!-- Vercel Web Analytics; 404s on localhost. -->
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-  <script src="source/js/template.js?v=15" data-page="contact" data-root="source/"></script>
+<!-- build:content -->
+<!-- Shared layout. Placeholders inside comments get substituted too — avoid. -->
+
+<a class="skip-link" href="#main" data-i18n="base.skip-to-content">Zum Inhalt springen</a>
+
+<!-- Sticky navbar -->
+<header class="nav" id="site-nav">
+  <div class="shell nav__inner">
+    <a class="brand" href="index.html">
+      <img class="brand__mark" src="source/images/logo.png" alt=""
+           width="60" height="60"
+           data-src-light="source/images/logo.png"
+           data-src-dark="source/images/logo-dark.png">
+      <span>
+        <span class="brand__name" data-i18n="base.cinnamon-and-sugar">Cinnamon &amp; Sugar</span>
+        <span class="brand__tag" data-i18n="base.bakery-and-coffee">Bäckerei &amp; Café</span>
+      </span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false"
+            aria-controls="nav-menu" aria-label="Navigation ein- und ausblenden" data-i18n-attr="aria-label:base.toggle-navigation-menu">
+        <span></span>
+      </button>
+
+    <nav class="nav__menu" id="nav-menu" aria-label="Hauptnavigation" data-i18n-attr="aria-label:base.main">
+      <ul class="nav__links">
+        <li><a class="nav__link" data-nav="index"   href="index.html" data-i18n="base.home">Start</a></li>
+        <li><a class="nav__link" data-nav="menu"    href="menu.html" data-i18n="base.menu">Speisekarte</a></li>
+        <li><a class="nav__link" data-nav="about"   href="about.html" data-i18n="base.about">Über uns</a></li>
+        <li><a class="nav__link" data-nav="contact" href="contact.html" data-i18n="base.contact">Kontakt</a></li>
+        <li class="lang" role="group" aria-label="Sprache ändern" data-i18n-attr="aria-label:base.change-language">
+          <button type="button" class="lang__btn" data-lang="de" aria-pressed="false" data-i18n="base.de">DE</button>
+          <button type="button" class="lang__btn" data-lang="en" aria-pressed="false" data-i18n="base.en">EN</button>
+          <button type="button" class="lang__btn" data-lang="el" aria-pressed="false" data-i18n="base.el">EL</button>
+        </li>
+        <li>
+          <a class="btn nav__cta" href="contact.html#order" data-i18n="base.order-online">Online bestellen</a>
+        </li>
+        <li>
+          <button class="theme-toggle" type="button" aria-pressed="false"
+                  aria-label="Switch to dark mode">
+            <svg class="theme-toggle__icon" width="22" height="22" viewBox="0 0 24 24"
+                 aria-hidden="true" focusable="false"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Z"/></svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Page content -->
+<main id="main">
+  <!-- title: Contact — Cinnamon & Sugar -->
+
+<section class="banner">
+  <div class="shell">
+    <span class="eyebrow" data-i18n="contact.say-hello">Sag Hallo</span>
+    <h1 data-i18n="contact.contact-and-visit">Kontakt &amp; Besuch</h1>
+    <p class="lede" data-i18n="contact.questions-about-a-cake-order-a">Fragen zu einer Tortenbestellung, einer großen Frühstückslieferung oder ob es noch Bougatsa mit Vanille gibt? Ruf im Laden an — das geht am schnellsten.</p>
+  </div>
+</section>
+
+<!-- Details + hours -->
+<section class="section">
+  <div class="shell split">
+    <div>
+      <span class="eyebrow" data-i18n="contact.details">Details</span>
+      <h2 data-i18n="contact.where-to-find-us">Wo du uns findest</h2>
+
+      <ul class="detail-list">
+        <li>
+          <span class="ico" aria-hidden="true">📍</span>
+          <div>
+            <span class="label" data-i18n="contact.address">Adresse</span>
+            <span class="value">
+              <a href="https://www.openstreetmap.org/?mlat=52.5455117&amp;mlon=13.4192466#map=18/52.5455117/13.4192466"
+                 target="_blank" rel="noopener" data-i18n="contact.lychener-strasse-63-10437-berlin">Lychener Straße 63, 10437 Berlin</a>
+            </span>
+          </div>
+        </li>
+        <li>
+          <span class="ico" aria-hidden="true">📞</span>
+          <div>
+            <span class="label" data-i18n="contact.phone">Telefon</span>
+            <span class="value"><a href="tel:+493065863658">+49 30 65863658</a></span>
+          </div>
+        </li>
+        <li>
+          <span class="ico" aria-hidden="true">🛵</span>
+          <div>
+            <span class="label" data-i18n="contact.delivery">Lieferung</span>
+            <span class="value" data-i18n-skip>
+              <a href="https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar" target="_blank" rel="noopener" data-i18n="common.wolt">Wolt</a>
+              &amp;
+              <a href="https://www.ubereats.com/de-en/store/coffee-%26-bakery-cinnamon-and-sugar/b0k5kIpiRRClQ3yqFfLjxg" target="_blank" rel="noopener" data-i18n="common.uber-eats">Uber Eats</a>
+            </span>
+          </div>
+        </li>
+        <li>
+          <span class="ico" aria-hidden="true">🗺️</span>
+          <div>
+            <span class="label" data-i18n="contact.delivery-area">Liefergebiet</span>
+            <span class="value" data-i18n="contact.roughly-3-km-around-the-shop">Rund 3 km um den Laden</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <span class="eyebrow" data-i18n="common.opening-hours">Öffnungszeiten</span>
+      <h2 data-i18n="contact.when-we-re-open">Wann wir geöffnet haben</h2>
+
+      <dl class="hours">
+        <div class="hours__row hours__row--closed">
+          <dt data-i18n="common.monday">Montag</dt><dd data-i18n="common.closed">Ruhetag</dd>
+        </div>
+        <div class="hours__row"><dt data-i18n="contact.tuesday">Dienstag</dt><dd>08:00 – 17:00</dd></div>
+        <div class="hours__row"><dt data-i18n="contact.wednesday">Mittwoch</dt><dd>08:00 – 17:00</dd></div>
+        <div class="hours__row"><dt data-i18n="contact.thursday">Donnerstag</dt><dd>08:00 – 17:00</dd></div>
+        <div class="hours__row"><dt data-i18n="common.friday">Freitag</dt><dd>08:00 – 18:00</dd></div>
+        <div class="hours__row"><dt data-i18n="contact.saturday">Samstag</dt><dd>09:00 – 18:00</dd></div>
+        <div class="hours__row"><dt data-i18n="contact.sunday">Sonntag</dt><dd>09:00 – 18:00</dd></div>
+      </dl>
+
+      <div class="btn-row">
+        <a class="btn" href="tel:+493065863658" data-i18n="contact.call-the-shop">Im Laden anrufen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Order platforms -->
+<section class="section section--cream" id="order">
+  <div class="shell">
+    <div class="section-head section-head--center">
+      <span class="eyebrow" data-i18n="common.delivery-and-pickup">Lieferung &amp; Abholung</span>
+      <h2 data-i18n="contact.order-to-your-door">Lieferung bis vor die Tür</h2>
+      <p class="lede" data-i18n="contact.we-re-on-both-platforms-pick">Wir sind auf beiden Plattformen — nimm die, die du ohnehin nutzt. Geliefert wird im Umkreis von rund 3 km, oder du bestellst vor und holst ab.</p>
+    </div>
+
+    <div class="grid grid--2">
+      <a class="order-card" href="https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar" target="_blank" rel="noopener">
+        <span class="order-card__mark" aria-hidden="true">🛵</span>
+        <span>
+          <span class="order-card__name" data-i18n="common.wolt">Wolt</span>
+          <span class="order-card__note" data-i18n="contact.delivery-and-pickup-rated-9-0">Lieferung &amp; Abholung · bewertet mit 9,0 / 10</span>
+        </span>
+        <span class="order-card__go" aria-hidden="true">→</span>
+      </a>
+
+      <a class="order-card" href="https://www.ubereats.com/de-en/store/coffee-%26-bakery-cinnamon-and-sugar/b0k5kIpiRRClQ3yqFfLjxg" target="_blank" rel="noopener">
+        <span class="order-card__mark" aria-hidden="true">🥡</span>
+        <span>
+          <span class="order-card__name" data-i18n="common.uber-eats">Uber Eats</span>
+          <span class="order-card__note" data-i18n="common.delivery-and-pickup">Lieferung &amp; Abholung</span>
+        </span>
+        <span class="order-card__go" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Social -->
+<section class="section section--tight">
+  <div class="shell">
+    <div class="section-head section-head--center">
+      <span class="eyebrow" data-i18n="contact.follow-along">Folge uns</span>
+      <h2 data-i18n="contact.see-what-came-out-of-the">Sieh, was aus dem Ofen kommt</h2>
+      <p class="lede" data-i18n="contact.instagram-is-where-we-post-daily">Auf Instagram posten wir täglich — was in der Auslage liegt, was schon weg ist und die Specials, die es nie auf die Karte schaffen.</p>
+    </div>
+
+    <ul class="social u-center">
+      <li class="social--brand social--instagram">
+        <a href="https://www.instagram.com/greek_coffee_bakery/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.43.42.7.82.92 1.4.17.42.37 1.05.42 2.24.06 1.28.07 1.66.07 4.88s0 3.6-.07 4.88c-.05 1.2-.25 1.82-.42 2.24-.22.58-.49.98-.91 1.4-.42.42-.82.69-1.4.91-.42.17-1.05.37-2.24.42-1.28.06-1.66.07-4.88.07s-3.6 0-4.88-.07c-1.2-.05-1.82-.25-2.24-.42-.58-.22-.98-.49-1.4-.91-.42-.42-.69-.82-.91-1.4-.17-.42-.37-1.05-.42-2.24C2.21 15.6 2.2 15.22 2.2 12s0-3.6.07-4.88c.05-1.2.25-1.82.42-2.24.22-.58.49-.98.91-1.4.42-.42.82-.69 1.4-.91.42-.17 1.05-.37 2.24-.42C8.4 2.21 8.8 2.2 12 2.2Zm0 1.98c-3.16 0-3.53.01-4.78.07-.9.04-1.39.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.32-.28.81-.32 1.71-.06 1.25-.07 1.62-.07 4.78s.01 3.53.07 4.78c.4.9.19 1.39.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.13.81.28 1.71.32 1.25.06 1.62.07 4.78.07s3.53-.01 4.78-.07c.9-.04 1.39-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.32.28-.81.32-1.71.06-1.25.07-1.62.07-4.78s-.01-3.53-.07-4.78c-.04-.9-.19-1.39-.32-1.71a2.85 2.85 0 0 0-.69-1.06 2.85 2.85 0 0 0-1.06-.69c-.32-.13-.81-.28-1.71-.32-1.25-.06-1.62-.07-4.78-.07Zm0 3.37a4.45 4.45 0 1 1 0 8.9 4.45 4.45 0 0 1 0-8.9Zm0 7.34a2.89 2.89 0 1 0 0-5.78 2.89 2.89 0 0 0 0 5.78Zm5.67-7.54a1.04 1.04 0 1 1-2.08 0 1.04 1.04 0 0 1 2.08 0Z"/></svg>
+          Instagram
+        </a>
+      </li>
+      <li class="social--brand social--facebook">
+        <a href="https://www.facebook.com/p/Cinnamon-and-Sugar-100090695405160/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
+          Facebook
+        </a>
+      </li>
+      <li class="social--brand social--tiktok">
+        <a href="https://www.tiktok.com/@cinnamon.and.suga8" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-4.66 1.55 2.59 2.59 0 0 1 3.3-3.84v-3.2a5.72 5.72 0 1 0 4.51 5.59V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.3-1.48Z"/></svg>
+          TikTok
+        </a>
+      </li>
+    </ul>
+
+    <p class="review-line">
+      <span data-i18n="contact.enjoyed-it-a-review-helps-other">Hat es geschmeckt? Eine Bewertung hilft anderen aus dem Kiez, uns zu finden.</span>
+    </p>
+    <div class="btn-row u-center u-top-md">
+      <a class="btn btn--ghost" href="https://g.page/r/CeMncRmxMK90EBE/review" target="_blank" rel="noopener"
+         data-i18n="common.rate-us-on-google">Bewerte uns auf Google</a>
+    </div>
+  </div>
+</section>
+
+<!-- Map -->
+<section class="section section--tight section--paper">
+  <div class="shell">
+    <iframe
+      class="map"
+      title="Karte mit Cinnamon &amp; Sugar in der Lychener Straße 63, Berlin"
+      loading="lazy"
+      src="https://www.openstreetmap.org/export/embed.html?bbox=13.4132%2C52.5425%2C13.4253%2C52.5485&amp;layer=mapnik&amp;marker=52.5455117%2C13.4192466" data-i18n-attr="title:common.map-showing-cinnamon-and-sugar-at"></iframe>
+  </div>
+</section>
+
+<!-- Enquiry form -->
+<section class="section section--cream">
+  <div class="shell shell--slim">
+    <div class="section-head section-head--center">
+      <span class="eyebrow" data-i18n="contact.enquiries">Anfragen</span>
+      <h2 data-i18n="contact.cakes-catering-and-everything-else">Torten, Catering &amp; alles andere</h2>
+      <p class="lede" data-i18n="contact.ordering-a-whole-karidopita-a-breakfast">Eine ganze Karidopita, ein Frühstück fürs Büro oder ein Blech Bougatsa für Sonntag? Schreib uns die Details.</p>
+    </div>
+
+    <!-- data-mailto: fallback inbox when /api/contact is unconfigured. -->
+    <form class="form" id="enquiry-form" data-mailto="bestellung@cinnamon-und-sugar.de" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="name" data-i18n="contact.your-name">Dein Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="email" data-i18n="contact.email">E-Mail</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="topic" data-i18n="contact.what-s-it-about">Worum geht es?</label>
+        <select id="topic" name="topic">
+          <option data-i18n="contact.cake-or-pastry-order">Torten- oder Gebäckbestellung</option>
+          <option data-i18n="contact.catering-office-breakfast">Catering / Frühstück fürs Büro</option>
+          <option data-i18n="contact.large-delivery">Große Lieferung</option>
+          <option data-i18n="contact.feedback">Feedback</option>
+          <option data-i18n="contact.something-else">Etwas anderes</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="message" data-i18n="contact.message">Nachricht</label>
+        <textarea id="message" name="message"
+                  placeholder="Sag uns, was du brauchst und wann du es brauchst."
+                  required data-i18n-attr="placeholder:contact.tell-us-what-you-need-and"></textarea>
+      </div>
+
+      <!-- Honeypot. -->
+      <div class="field field--trap" aria-hidden="true">
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="btn-row u-top-sm">
+        <button class="btn" type="submit" data-i18n="contact.send-message">Nachricht senden</button>
+      </div>
+
+      <p class="form__status" role="status" aria-live="polite" hidden></p>
+
+      <p class="form__note" data-i18n-skip>
+        <span data-i18n="contact.we-usually-reply-within-a-day">Wir antworten meist innerhalb eines Tages. Für alles Dringende ruf uns bitte an:</span>
+        <a href="tel:+493065863658">+49 30 65863658</a>
+      </p>
+    </form>
+  </div>
+</section>
+
+<script src="source/js/contact.js" defer></script>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <span class="brand__name" data-i18n="base.cinnamon-and-sugar">Cinnamon &amp; Sugar</span>
+        <p data-i18n="base.a-small-family-run-bakery-and">Eine kleine familiengeführte Bäckerei mit Café in Prenzlauer Berg. Griechische Bougatsa, frische Bagels, Brioche-Sandwiches und richtiger Freddo Espresso — jeden Morgen frisch gebacken und gebrüht in der Lychener Straße.</p>
+
+        <ul class="social">
+          <li class="social--brand social--instagram">
+            <a href="https://www.instagram.com/greek_coffee_bakery/" target="_blank" rel="noopener"
+               aria-label="Cinnamon &amp; Sugar auf Instagram" data-i18n-attr="aria-label:base.cinnamon-and-sugar-on-instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.43.42.7.82.92 1.4.17.42.37 1.05.42 2.24.06 1.28.07 1.66.07 4.88s0 3.6-.07 4.88c-.05 1.2-.25 1.82-.42 2.24-.22.58-.49.98-.91 1.4-.42.42-.82.69-1.4.91-.42.17-1.05.37-2.24.42-1.28.06-1.66.07-4.88.07s-3.6 0-4.88-.07c-1.2-.05-1.82-.25-2.24-.42-.58-.22-.98-.49-1.4-.91-.42-.42-.69-.82-.91-1.4-.17-.42-.37-1.05-.42-2.24C2.21 15.6 2.2 15.22 2.2 12s0-3.6.07-4.88c.05-1.2.25-1.82.42-2.24.22-.58.49-.98.91-1.4.42-.42.82-.69 1.4-.91.42-.17 1.05-.37 2.24-.42C8.4 2.21 8.8 2.2 12 2.2Zm0 1.98c-3.16 0-3.53.01-4.78.07-.9.04-1.39.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.32-.28.81-.32 1.71-.06 1.25-.07 1.62-.07 4.78s.01 3.53.07 4.78c.4.9.19 1.39.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.13.81.28 1.71.32 1.25.06 1.62.07 4.78.07s3.53-.01 4.78-.07c.9-.04 1.39-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.32.28-.81.32-1.71.06-1.25.07-1.62.07-4.78s-.01-3.53-.07-4.78c-.04-.9-.19-1.39-.32-1.71a2.85 2.85 0 0 0-.69-1.06 2.85 2.85 0 0 0-1.06-.69c-.32-.13-.81-.28-1.71-.32-1.25-.06-1.62-.07-4.78-.07Zm0 3.37a4.45 4.45 0 1 1 0 8.9 4.45 4.45 0 0 1 0-8.9Zm0 7.34a2.89 2.89 0 1 0 0-5.78 2.89 2.89 0 0 0 0 5.78Zm5.67-7.54a1.04 1.04 0 1 1-2.08 0 1.04 1.04 0 0 1 2.08 0Z"/></svg>
+              Instagram
+            </a>
+          </li>
+          <li class="social--brand social--facebook">
+            <a href="https://www.facebook.com/p/Cinnamon-and-Sugar-100090695405160/" target="_blank" rel="noopener"
+               aria-label="Cinnamon &amp; Sugar auf Facebook" data-i18n-attr="aria-label:base.cinnamon-and-sugar-on-facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
+              Facebook
+            </a>
+          </li>
+          <li class="social--brand social--tiktok">
+            <a href="https://www.tiktok.com/@cinnamon.and.suga8" target="_blank" rel="noopener"
+               aria-label="Cinnamon &amp; Sugar auf TikTok" data-i18n-attr="aria-label:base.cinnamon-and-sugar-on-tiktok">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-4.66 1.55 2.59 2.59 0 0 1 3.3-3.84v-3.2a5.72 5.72 0 1 0 4.51 5.59V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.3-1.48Z"/></svg>
+              TikTok
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 data-i18n="base.visit">Besuch</h4>
+        <ul>
+          <li data-i18n="common.lychener-strasse-63">Lychener Straße 63</li>
+          <li data-i18n="base.10437-berlin-germany">10437 Berlin, Deutschland</li>
+          <li><a href="tel:+493065863658">+49 30 65863658</a></li>
+          <li>
+            <a href="https://www.openstreetmap.org/?mlat=52.5455117&amp;mlon=13.4192466#map=18/52.5455117/13.4192466"
+               target="_blank" rel="noopener" data-i18n="base.open-in-maps">In Karten öffnen</a>
+          </li>
+          <li>
+            <a href="https://g.page/r/CeMncRmxMK90EBE/review" target="_blank" rel="noopener"
+               data-i18n="common.rate-us-on-google">Bewerte uns auf Google</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 data-i18n="common.opening-hours">Öffnungszeiten</h4>
+        <ul>
+          <li data-i18n="base.mon-closed">Mo — Ruhetag</li>
+          <li data-i18n="base.tue-thu-08-00-17-00">Di–Do — 08:00–17:00</li>
+          <li data-i18n="base.fri-08-00-18-00">Fr — 08:00–18:00</li>
+          <li data-i18n="base.sat-sun-09-00-18-00">Sa–So — 09:00–18:00</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 data-i18n="base.order">Bestellen</h4>
+        <ul>
+          <li><a href="https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar" target="_blank" rel="noopener" data-i18n="common.wolt">Wolt</a></li>
+          <li><a href="https://www.ubereats.com/de-en/store/coffee-%26-bakery-cinnamon-and-sugar/b0k5kIpiRRClQ3yqFfLjxg" target="_blank" rel="noopener" data-i18n="common.uber-eats">Uber Eats</a></li>
+          <li><a href="contact.html#order" data-i18n="common.delivery-and-pickup">Lieferung &amp; Abholung</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <span data-i18n="base.year-cinnamon-and-sugar-all-rights">© 2026 Cinnamon &amp; Sugar. Alle Rechte vorbehalten.</span>
+      <span data-i18n-skip>
+        <span data-i18n="base.delivery-and-pickup-via">Lieferung &amp; Abholung über</span>
+        <a href="https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar" target="_blank" rel="noopener" data-i18n="common.wolt">Wolt</a>
+        <span data-i18n="base.and">und</span>
+        <a href="https://www.ubereats.com/de-en/store/coffee-%26-bakery-cinnamon-and-sugar/b0k5kIpiRRClQ3yqFfLjxg" target="_blank" rel="noopener" data-i18n="common.uber-eats">Uber Eats</a>
+      </span>
+      <span data-i18n-skip>
+        <span data-i18n="base.developed-and-maintained-by">Entwickelt und betreut von</span>
+        Evangelos Tsakoudis
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- /build:content -->
+  <script src="source/js/template.js?v=19" data-page="contact" data-root="source/"></script>
 </body>
 </html>

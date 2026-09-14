@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Menu — Cinnamon &amp; Sugar</title>
-  <meta name="description" content="The full Cinnamon &amp; Sugar menu: brioche sandwiches, bagels, bougatsa, cakes, hot coffee, freddo and cold drinks.">
+  <title>Speisekarte — Cinnamon &amp; Sugar</title>
+  <meta name="description" content="Die ganze Speisekarte von Cinnamon &amp; Sugar: Brioche-Sandwiches, Bagels, Bougatsa, Kuchen, heißer Kaffee, Freddo und kalte Getränke.">
 
   <link rel="canonical" href="https://cinnamon-und-sugar.de/menu.html">
 
-  <link rel="icon" type="image/jpeg" href="source/images/favicon.jpg">
+  <link rel="icon" type="image/png" href="source/images/favicon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&amp;family=Karla:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="source/css/style.css?v=15">
+  <link rel="stylesheet" href="source/css/style.css?v=19">
 
   <script>
-    /* Set the theme before first paint. Each lookup is guarded separately. */
+    /* Set the theme before first paint. */
     (function () {
       var t = null;
       try { t = localStorage.getItem("cs-theme"); } catch (e) {}
@@ -32,13 +32,854 @@
     })();
   </script>
 
-  <!-- Vercel Web Analytics — enable it in the dashboard; 404s on localhost. -->
-  <script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
+  <!-- Vercel Web Analytics; 404s on localhost. -->
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-  <script src="source/js/template.js?v=15" data-page="menu" data-root="source/"></script>
+<!-- build:content -->
+<!-- Shared layout. Placeholders inside comments get substituted too — avoid. -->
+
+<a class="skip-link" href="#main" data-i18n="base.skip-to-content">Zum Inhalt springen</a>
+
+<!-- Sticky navbar -->
+<header class="nav" id="site-nav">
+  <div class="shell nav__inner">
+    <a class="brand" href="index.html">
+      <img class="brand__mark" src="source/images/logo.png" alt=""
+           width="60" height="60"
+           data-src-light="source/images/logo.png"
+           data-src-dark="source/images/logo-dark.png">
+      <span>
+        <span class="brand__name" data-i18n="base.cinnamon-and-sugar">Cinnamon &amp; Sugar</span>
+        <span class="brand__tag" data-i18n="base.bakery-and-coffee">Bäckerei &amp; Café</span>
+      </span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false"
+            aria-controls="nav-menu" aria-label="Navigation ein- und ausblenden" data-i18n-attr="aria-label:base.toggle-navigation-menu">
+        <span></span>
+      </button>
+
+    <nav class="nav__menu" id="nav-menu" aria-label="Hauptnavigation" data-i18n-attr="aria-label:base.main">
+      <ul class="nav__links">
+        <li><a class="nav__link" data-nav="index"   href="index.html" data-i18n="base.home">Start</a></li>
+        <li><a class="nav__link" data-nav="menu"    href="menu.html" data-i18n="base.menu">Speisekarte</a></li>
+        <li><a class="nav__link" data-nav="about"   href="about.html" data-i18n="base.about">Über uns</a></li>
+        <li><a class="nav__link" data-nav="contact" href="contact.html" data-i18n="base.contact">Kontakt</a></li>
+        <li class="lang" role="group" aria-label="Sprache ändern" data-i18n-attr="aria-label:base.change-language">
+          <button type="button" class="lang__btn" data-lang="de" aria-pressed="false" data-i18n="base.de">DE</button>
+          <button type="button" class="lang__btn" data-lang="en" aria-pressed="false" data-i18n="base.en">EN</button>
+          <button type="button" class="lang__btn" data-lang="el" aria-pressed="false" data-i18n="base.el">EL</button>
+        </li>
+        <li>
+          <a class="btn nav__cta" href="contact.html#order" data-i18n="base.order-online">Online bestellen</a>
+        </li>
+        <li>
+          <button class="theme-toggle" type="button" aria-pressed="false"
+                  aria-label="Switch to dark mode">
+            <svg class="theme-toggle__icon" width="22" height="22" viewBox="0 0 24 24"
+                 aria-hidden="true" focusable="false"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Z"/></svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Page content -->
+<main id="main">
+  <!-- title: Menu — Cinnamon & Sugar -->
+
+
+<section class="banner">
+  <div class="shell">
+    <span class="eyebrow" data-i18n="menu.speisekarte">Speisekarte</span>
+    <h1 data-i18n="menu.the-menu">Die Speisekarte</h1>
+    <p class="lede" data-i18n="menu.everything-we-bake-and-brew-availability">Alles, was wir backen und brühen. Was da ist, ändert sich über den Tag — die Bougatsa ist meist zuerst weg.</p>
+  </div>
+</section>
+
+
+<nav class="menu-nav" aria-label="Kategorien der Speisekarte" data-i18n-attr="aria-label:menu.menu-categories">
+  <div class="shell menu-nav__scroll">
+    <a class="menu-nav__link" href="#brioche-sandwiches" data-i18n="menu.brioche-sandwiches">BRIOCHE-SANDWICHES 🍞🥓🥪</a>
+    <a class="menu-nav__link" href="#bagels" data-i18n="menu.bagels">BAGELS 🥯</a>
+    <a class="menu-nav__link" href="#bowl" data-i18n="menu.bowl">BOWL 🥣</a>
+    <a class="menu-nav__link" href="#backwaren" data-i18n="menu.backwaren">BACKWAREN 🥨</a>
+    <a class="menu-nav__link" href="#nachtisch" data-i18n="menu.nachtisch">NACHTISCH 🍰</a>
+    <a class="menu-nav__link" href="#hei-getranke" data-i18n="menu.hei-getranke">HEIẞGETRÄNKE ☕</a>
+    <a class="menu-nav__link" href="#kalte-getranke" data-i18n="menu.kalte-getranke">KALTE GETRÄNKE 🥤</a>
+    <a class="menu-nav__link" href="#alkoholfreie-getranke" data-i18n="menu.alkoholfreie-getranke">ALKOHOLFREIE GETRÄNKE 🥤</a>
+  </div>
+</nav>
+
+
+<div class="shell">
+
+  <section class="menu-section" id="brioche-sandwiches">
+    <div class="menu-section__head">
+      <h2 data-i18n="menu.brioche-sandwiches">BRIOCHE-SANDWICHES 🍞🥓🥪</h2>
+      <p data-i18n="menu.toasted-brioche-bread">Getoastetes Briochebrot</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/brioche-salmon-eggs.jpg" alt="Brioche salmon eggs" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Brioche salmon eggs</h3>
+          <p class="menu-item__desc">Toasted Brioche bread 🍞 with Salmon ,Eggs, Avocados and Salad</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/brioche-sandwich-with-bacon-and-eggs.jpg" alt="Brioche Sandwich with bacon and eggs" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Brioche Sandwich with bacon and eggs</h3>
+          <p class="menu-item__desc">Brioche Bread 🍞 with Bacon 🥓 Eggs 🍳 and Avocado toasted.
+Perfect for your breakfast ☀️</p>
+          <span class="tag" data-i18n="common.popular">Beliebt</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="menu-section" id="bagels">
+    <div class="menu-section__head">
+      <h2 data-i18n="menu.bagels">BAGELS 🥯</h2>
+      <p data-i18n="menu.built-to-order-on-fresh-bagels">Frisch belegt auf frischen Bagels</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/bagel-bacon-and-spiegelei.jpg" alt="Bagel Bacon &amp; Spiegelei" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Bagel Bacon &amp; Spiegelei</h3>
+          <p class="menu-item__desc">mit Käse, Schinken, Spiegelei, Speck, Frischkäse, Margarine und Mix-Blattsalat</p>
+          <span class="tag" data-i18n="common.popular">Beliebt</span>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/bagel-mediterran.jpg" alt="Bagel Mediterran" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Bagel Mediterran</h3>
+          <p class="menu-item__desc">mit Feta, getrockneten Tomaten, Frischkäse, Margarine, Mix-Blattsalat und Oregano</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/bagel-gourmet.jpg" alt="Bagel Gourmet" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Bagel Gourmet</h3>
+          <p class="menu-item__desc">mit Feta, getrockneten Tomaten, eingelegtem Paprika, Oliven, Frischkäse, Margarine, Mix-Blattsalat und Oregano</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/bagel-lachs.jpg" alt="Bagel Lachs" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Bagel Lachs</h3>
+          <p class="menu-item__desc">mit Lachs, Spiegelei, Avocado, Frischkäse, Margarine, Mix-Blattsalat und Frühligszwiebeln</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/bagel-mozzarella-pesto.jpg" alt="Bagel Mozzarella-Pesto" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Bagel Mozzarella-Pesto</h3>
+          <p class="menu-item__desc">mit Mozzarella, Pesto, Tomate, Frischkäse, Margarine, Mix-Blattsalat und Oregano</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="menu-section" id="bowl">
+    <div class="menu-section__head">
+      <h2 data-i18n="menu.bowl">BOWL 🥣</h2>
+      <p data-i18n="menu.something-lighter">Etwas Leichteres</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/greek-joghurt.jpg" alt="Greek Joghurt" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Greek Joghurt</h3>
+          <p class="menu-item__desc">mit Rote Grütze und Granola</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="menu-section" id="backwaren">
+    <div class="menu-section__head">
+      <h2 data-i18n="menu.backwaren">BACKWAREN 🥨</h2>
+      <p data-i18n="menu.baked-goods-out-of-the-oven">Backwaren — jeden Morgen frisch aus dem Ofen</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/sesamring.jpg" alt="Sesamring" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Sesamring</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/frischkasering.jpg" alt="Frischkäsering" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Frischkäsering</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/kase-schinken-pita.jpg" alt="Käse-Schinken-Pita" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Käse-Schinken-Pita</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/spinat-feta-pita.jpg" alt="Spinat-Feta-Pita" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Spinat-Feta-Pita</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/bougatsa-feta.jpg" alt="Bougatsa-Feta" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Bougatsa-Feta</h3>
+          <span class="tag" data-i18n="common.popular">Beliebt</span>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/bougatsa-hackfleisch.jpg" alt="Bougatsa-Hackfleisch" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Bougatsa-Hackfleisch</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/bougatsa-vanillecreme.jpg" alt="Bougatsa-Vanillecreme" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Bougatsa-Vanillecreme</h3>
+          <span class="tag" data-i18n="common.popular">Beliebt</span>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/nougat-croissant.jpg" alt="Nougat Croissant 🥐" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Nougat Croissant 🥐</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/pistachio-croissant.jpg" alt="Pistachio croissant 🥐" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Pistachio croissant 🥐</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/butter-croissant.jpg" alt="Butter croissant 🥐" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Butter croissant 🥐</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/homemade-banana-bread-with-chocolate-chips.jpg" alt="Homemade Banana bread with chocolate chips 🍌" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Homemade Banana bread with chocolate chips 🍌</h3>
+          <p class="menu-item__desc">Low sugar banana bread 🍌
+Perfect for your breakfast !</p>
+        </div>
+      </article>
+
+            <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/blueberry-muffin.jpg" alt="Blueberry Muffin 🧁" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Blueberry Muffin 🧁</h3>
+          <p class="menu-item__desc">Delicious blueberries in every bite 🫐
+Perfect for your breakfast !</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="menu-section" id="nachtisch">
+    <div class="menu-section__head">
+      <h2 data-i18n="menu.nachtisch">NACHTISCH 🍰</h2>
+      <p data-i18n="menu.desserts-greek-and-otherwise">Nachtisch, griechisch und anders</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/schoko-erdbeer-herz.jpg" alt="Schoko-Erdbeer-Herz" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Schoko-Erdbeer-Herz</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/mousse-torte.jpg" alt="Mousse-Torte" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Mousse-Torte</h3>
+        </div>
+      </article>
+
+            <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/oreo-kuchen.jpg" alt="Oreo Kuchen" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Oreo Kuchen</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/ekmek-kadayifi.jpg" alt="Ekmek Kadayifi" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Ekmek Kadayifi</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/red-velvet-kuchen.jpg" alt="Red Velvet Kuchen" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Red Velvet Kuchen</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/karotten-kuchen.jpg" alt="Karotten Kuchen" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Karotten Kuchen</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/mandelkuchen.jpg" alt="Mandelkuchen" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Mandelkuchen</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/bueno-kuchen.jpg" alt="Bueno Kuchen" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Bueno Kuchen</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/cheesecake.jpg" alt="Cheesecake" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Cheesecake</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/baklava.jpg" alt="Baklava" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Baklava</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/kataifi.jpg" alt="Kataifi" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Kataifi</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/kokakia-creme-patisserie.jpg" alt="Kokakia Creme Patisserie" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Kokakia Creme Patisserie</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/kornedaki-mit-creme-patisserie.jpg" alt="Kornedaki mit Creme Patisserie" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Kornedaki mit Creme Patisserie</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/orange-schoko-tortchen.jpg" alt="Orange-Schoko Törtchen" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Orange-Schoko Törtchen</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/ferrero-tortchen.jpg" alt="Ferrero Törtchen" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Ferrero Törtchen</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/trigonaki-panoramatos.jpg" alt="Trigonaki Panoramatos" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Trigonaki Panoramatos</h3>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/portokalopita.jpg" alt="Portokalopita 🍊" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Portokalopita 🍊</h3>
+          <p class="menu-item__desc">Greek traditional orange pie 🍊</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/karidopita.jpg" alt="Karidopita" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Karidopita</h3>
+          <p class="menu-item__desc">Greek traditional walnut pie 🥧🥜</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/lotus-cheesecake.jpg" alt="Lotus Cheesecake 🍰" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Lotus Cheesecake 🍰</h3>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="menu-section" id="hei-getranke">
+    <div class="menu-section__head">
+      <h2 data-i18n="menu.hei-getranke">HEIẞGETRÄNKE ☕</h2>
+      <p data-i18n="menu.hot-drinks">Heiße Getränke</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/kaffee.jpg" alt="Kaffee" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Kaffee</h3>
+          <p class="menu-item__desc">in einer Größe deiner Wahl</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/cappuccino.jpg" alt="Cappuccino" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Cappuccino</h3>
+          <p class="menu-item__desc">in einer Größe deiner Wahl</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/latte-macchiato-0-3l.jpg" alt="Latte Macchiato 0,3l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Latte Macchiato 0,3l</h3>
+          <p class="menu-item__desc">Ein Getränk aus heißer Milch und Milchschaum, dem ein Espresso hinzugefügt wird.</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/milchkaffee-0-2-l.jpg" alt="Milchkaffee 0,2 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Milchkaffee 0,2 l</h3>
+          <p class="menu-item__desc">Ein traditioneller, milder Kaffee aus gleichen Teilen frisch gebrühtem Kaffee und warmer Milch.</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/chai-latte-0-4-l.jpg" alt="Chai Latte 0,4 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Chai Latte 0,4 l</h3>
+          <p class="menu-item__desc">Ein gewürzter Schwarztee, kombiniert mit heißer, aufgeschäumter Milch.</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/heisse-schokolade-0-4-l.jpg" alt="Heiße Schokolade 0,4 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Heiße Schokolade 0,4 l</h3>
+          <p class="menu-item__desc">mit Sahne</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/matcha-latte.jpg" alt="Matcha Latte 🌿🫖🍵" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Matcha Latte 🌿🫖🍵</h3>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="menu-section" id="kalte-getranke">
+    <div class="menu-section__head">
+      <h2 data-i18n="menu.kalte-getranke">KALTE GETRÄNKE 🥤</h2>
+      <p data-i18n="menu.cold-coffee-and-fresh-juice">Kalter Kaffee und frischer Saft</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/griechischer-frappe-0-3-l.jpg" alt="Griechischer Frappé 0,3 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Griechischer Frappé 0,3 l</h3>
+          <p class="menu-item__desc">Ein aufgeschäumter Eiskaffee aus Instantkaffee, Wasser, Zucker und Eiswürfeln.</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/freddo-espresso-0-3-l.jpg" alt="Freddo Espresso 0,3 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Freddo Espresso 0,3 l</h3>
+          <p class="menu-item__desc">Kalter, aufgeschäumter Espresso, serviert auf Eiswürfeln.</p>
+          <span class="tag" data-i18n="common.popular">Beliebt</span>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/freddo-cappuccino-0-3-l.jpg" alt="Freddo Cappuccino 0,3 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Freddo Cappuccino 0,3 l</h3>
+          <p class="menu-item__desc">Kalter, aufgeschäumter Espresso mit kaltem Milchschaum.</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/iced-chai-latte-0-3-l.jpg" alt="Iced Chai Latte 0,3 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Iced Chai Latte 0,3 l</h3>
+          <p class="menu-item__desc">Ein gewürzter Schwarztee mit Milch, serviert auf Eis.</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/kalte-schokolade-0-3-l.jpg" alt="Kalte Schokolade 0,3 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Kalte Schokolade 0,3 l</h3>
+          <p class="menu-item__desc">mit Sahne</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/frisch-gepresster-orangensaft-0-4-l.jpg" alt="Frisch gepresster Orangensaft 0,4 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Frisch gepresster Orangensaft 0,4 l</h3>
+          <p class="menu-item__desc">Ein direkt aus Orangen gepresster Saft.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="menu-section" id="alkoholfreie-getranke">
+    <div class="menu-section__head">
+      <h2 data-i18n="menu.alkoholfreie-getranke">ALKOHOLFREIE GETRÄNKE 🥤</h2>
+      <p data-i18n="menu.bottles-and-cans">Flaschen und Dosen</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/mineralwasser-still-0-5-l.jpg" alt="Mineralwasser Still 0,5 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Mineralwasser Still 0,5 l</h3>
+          <p class="menu-item__desc">natürliches Mineralwasser ohne Kohlensäure</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/mineralwasser-sprudel-0-5-l.jpg" alt="Mineralwasser Sprudel 0,5 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Mineralwasser Sprudel 0,5 l</h3>
+          <p class="menu-item__desc">Natürliches Mineralwasser mit Kohlensäure</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/kakao-0-33-l.jpg" alt="Kakao 0,33 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Turm Kakao 0,5 l</h3>
+          <p class="menu-item__desc">Kakao Getränk, gesüßt, enthält Milch, ohne Kohlensäure</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/coca-cola-0-33-l.jpg" alt="Coca-Cola® 0,33 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Coca-Cola® 0,33 l</h3>
+          <p class="menu-item__desc">enthält Koffein 10,0 mg/100 ml</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/club-mate-0-5-l.jpg" alt="Club Mate 0,5 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Club Mate 0,5 l</h3>
+          <p class="menu-item__desc">enthält Koffein 20,0 mg/100 ml</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/olympus-griechischer-bergtee-pfirsich-0-5-l.jpg" alt="Olympus Griechischer Bergtee Pfirsich 0,5 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Olympus Griechischer Bergtee Pfirsich 0,5 l</h3>
+          <p class="menu-item__desc">Eisteegetränk mit griechischem Bergtee und Pfirsichgeschmack, Zucker, enthält Teeextrakt, ohne Kohlensäure</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/olympus-griechischer-bergtee-minze-0-5-l.jpg" alt="Olympus Griechischer Bergtee Minze 0,5 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Olympus Griechischer Bergtee Minze 0,5 l</h3>
+          <p class="menu-item__desc">Eisteegetränk mit griechischem Bergtee und Minzgeschmack, Zucker, enthält Teeextrakt, ohne Kohlensäure</p>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="item-photo" data-placeholder="Foto folgt" data-i18n-attr="data-placeholder:common.photo-coming-soon">
+          <img src="source/images/menu/olympus-griechischer-bergtee-zitrone-0-5-l.jpg" alt="Olympus Griechischer Bergtee Zitrone 0,5 l" loading="lazy">
+        </div>
+        <div class="menu-item__body">
+          <h3 class="menu-item__name">Olympus Griechischer Bergtee Zitrone 0,5 l</h3>
+          <p class="menu-item__desc">Eisteegetränk mit griechischem Bergtee und Zitronengeschmack, Zucker, enthält Teeextrakt, ohne Kohlensäure</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+</div>
+
+
+<section class="cta">
+  <div class="shell">
+    <h2 data-i18n="menu.hungry-now">Jetzt hungrig?</h2>
+    <p data-i18n="menu.order-for-delivery-or-pickup-or">Bestell zur Lieferung oder Abholung — oder komm einfach vorbei, Lychener Straße 63.</p>
+    <div class="btn-row">
+      <a class="btn btn--light" href="https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar"
+         target="_blank" rel="noopener" data-i18n="common.order-on-wolt">Auf Wolt bestellen</a>
+      <a class="btn btn--light" href="https://www.ubereats.com/de-en/store/coffee-%26-bakery-cinnamon-and-sugar/b0k5kIpiRRClQ3yqFfLjxg"
+         target="_blank" rel="noopener" data-i18n="common.order-on-uber-eats">Auf Uber Eats bestellen</a>
+      <a class="btn btn--ghost" href="contact.html" data-i18n="menu.find-the-shop">Laden finden</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <span class="brand__name" data-i18n="base.cinnamon-and-sugar">Cinnamon &amp; Sugar</span>
+        <p data-i18n="base.a-small-family-run-bakery-and">Eine kleine familiengeführte Bäckerei mit Café in Prenzlauer Berg. Griechische Bougatsa, frische Bagels, Brioche-Sandwiches und richtiger Freddo Espresso — jeden Morgen frisch gebacken und gebrüht in der Lychener Straße.</p>
+
+        <ul class="social">
+          <li class="social--brand social--instagram">
+            <a href="https://www.instagram.com/greek_coffee_bakery/" target="_blank" rel="noopener"
+               aria-label="Cinnamon &amp; Sugar auf Instagram" data-i18n-attr="aria-label:base.cinnamon-and-sugar-on-instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.43.42.7.82.92 1.4.17.42.37 1.05.42 2.24.06 1.28.07 1.66.07 4.88s0 3.6-.07 4.88c-.05 1.2-.25 1.82-.42 2.24-.22.58-.49.98-.91 1.4-.42.42-.82.69-1.4.91-.42.17-1.05.37-2.24.42-1.28.06-1.66.07-4.88.07s-3.6 0-4.88-.07c-1.2-.05-1.82-.25-2.24-.42-.58-.22-.98-.49-1.4-.91-.42-.42-.69-.82-.91-1.4-.17-.42-.37-1.05-.42-2.24C2.21 15.6 2.2 15.22 2.2 12s0-3.6.07-4.88c.05-1.2.25-1.82.42-2.24.22-.58.49-.98.91-1.4.42-.42.82-.69 1.4-.91.42-.17 1.05-.37 2.24-.42C8.4 2.21 8.8 2.2 12 2.2Zm0 1.98c-3.16 0-3.53.01-4.78.07-.9.04-1.39.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.32-.28.81-.32 1.71-.06 1.25-.07 1.62-.07 4.78s.01 3.53.07 4.78c.4.9.19 1.39.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.13.81.28 1.71.32 1.25.06 1.62.07 4.78.07s3.53-.01 4.78-.07c.9-.04 1.39-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.32.28-.81.32-1.71.06-1.25.07-1.62.07-4.78s-.01-3.53-.07-4.78c-.04-.9-.19-1.39-.32-1.71a2.85 2.85 0 0 0-.69-1.06 2.85 2.85 0 0 0-1.06-.69c-.32-.13-.81-.28-1.71-.32-1.25-.06-1.62-.07-4.78-.07Zm0 3.37a4.45 4.45 0 1 1 0 8.9 4.45 4.45 0 0 1 0-8.9Zm0 7.34a2.89 2.89 0 1 0 0-5.78 2.89 2.89 0 0 0 0 5.78Zm5.67-7.54a1.04 1.04 0 1 1-2.08 0 1.04 1.04 0 0 1 2.08 0Z"/></svg>
+              Instagram
+            </a>
+          </li>
+          <li class="social--brand social--facebook">
+            <a href="https://www.facebook.com/p/Cinnamon-and-Sugar-100090695405160/" target="_blank" rel="noopener"
+               aria-label="Cinnamon &amp; Sugar auf Facebook" data-i18n-attr="aria-label:base.cinnamon-and-sugar-on-facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
+              Facebook
+            </a>
+          </li>
+          <li class="social--brand social--tiktok">
+            <a href="https://www.tiktok.com/@cinnamon.and.suga8" target="_blank" rel="noopener"
+               aria-label="Cinnamon &amp; Sugar auf TikTok" data-i18n-attr="aria-label:base.cinnamon-and-sugar-on-tiktok">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-4.66 1.55 2.59 2.59 0 0 1 3.3-3.84v-3.2a5.72 5.72 0 1 0 4.51 5.59V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3a4.29 4.29 0 0 1-3.3-1.48Z"/></svg>
+              TikTok
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 data-i18n="base.visit">Besuch</h4>
+        <ul>
+          <li data-i18n="common.lychener-strasse-63">Lychener Straße 63</li>
+          <li data-i18n="base.10437-berlin-germany">10437 Berlin, Deutschland</li>
+          <li><a href="tel:+493065863658">+49 30 65863658</a></li>
+          <li>
+            <a href="https://www.openstreetmap.org/?mlat=52.5455117&amp;mlon=13.4192466#map=18/52.5455117/13.4192466"
+               target="_blank" rel="noopener" data-i18n="base.open-in-maps">In Karten öffnen</a>
+          </li>
+          <li>
+            <a href="https://g.page/r/CeMncRmxMK90EBE/review" target="_blank" rel="noopener"
+               data-i18n="common.rate-us-on-google">Bewerte uns auf Google</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 data-i18n="common.opening-hours">Öffnungszeiten</h4>
+        <ul>
+          <li data-i18n="base.mon-closed">Mo — Ruhetag</li>
+          <li data-i18n="base.tue-thu-08-00-17-00">Di–Do — 08:00–17:00</li>
+          <li data-i18n="base.fri-08-00-18-00">Fr — 08:00–18:00</li>
+          <li data-i18n="base.sat-sun-09-00-18-00">Sa–So — 09:00–18:00</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 data-i18n="base.order">Bestellen</h4>
+        <ul>
+          <li><a href="https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar" target="_blank" rel="noopener" data-i18n="common.wolt">Wolt</a></li>
+          <li><a href="https://www.ubereats.com/de-en/store/coffee-%26-bakery-cinnamon-and-sugar/b0k5kIpiRRClQ3yqFfLjxg" target="_blank" rel="noopener" data-i18n="common.uber-eats">Uber Eats</a></li>
+          <li><a href="contact.html#order" data-i18n="common.delivery-and-pickup">Lieferung &amp; Abholung</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bar">
+      <span data-i18n="base.year-cinnamon-and-sugar-all-rights">© 2026 Cinnamon &amp; Sugar. Alle Rechte vorbehalten.</span>
+      <span data-i18n-skip>
+        <span data-i18n="base.delivery-and-pickup-via">Lieferung &amp; Abholung über</span>
+        <a href="https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar" target="_blank" rel="noopener" data-i18n="common.wolt">Wolt</a>
+        <span data-i18n="base.and">und</span>
+        <a href="https://www.ubereats.com/de-en/store/coffee-%26-bakery-cinnamon-and-sugar/b0k5kIpiRRClQ3yqFfLjxg" target="_blank" rel="noopener" data-i18n="common.uber-eats">Uber Eats</a>
+      </span>
+      <span data-i18n-skip>
+        <span data-i18n="base.developed-and-maintained-by">Entwickelt und betreut von</span>
+        Evangelos Tsakoudis
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- /build:content -->
+  <script src="source/js/template.js?v=19" data-page="menu" data-root="source/"></script>
 </body>
 </html>
