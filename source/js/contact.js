@@ -63,6 +63,11 @@
           return;
         }
         if (res.status === 501 || res.status === 404) throw new Error("fallback");
+        if (res.status === 429) {
+          say("contact.too-many-messages-please-wait",
+              "Too many messages in a short time. Please wait a moment, or give us a call.", "bad");
+          throw new Error("rate-limited");
+        }
         return res.json().catch(function () { return {}; }).then(function (out) {
           say("contact.that-didn-t-go-through-please",
               "That didn't go through. Please call us, or try again.", "bad");
