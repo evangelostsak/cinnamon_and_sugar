@@ -1203,3 +1203,9 @@ p:last-child { margin-bottom: 0; }
     transition-duration: .01ms !important;
   }
 }
+
+/* Small layout nudges. Classes rather than style="", so the CSP can refuse
+   inline styles outright. */
+.u-center { justify-content: center; }
+.u-top-sm { margin-top: .25rem; }
+.u-top-md { margin-top: 1rem; }
