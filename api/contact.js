@@ -49,10 +49,15 @@ module.exports = async function handler(req, res) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))
     return res.status(400).json({ error: "bad-email" });
 
-  const to = process.env.CONTACT_TO;
-  const from = process.env.CONTACT_FROM;
-  const key = process.env.RESEND_API_KEY;
-  if (!to || !from || !key) return res.status(501).json({ error: "not-configured" });
+  /* Trim: a value pasted into the dashboard often carries a trailing newline,
+     and one in the API key makes the Authorization header invalid. */
+  const env = n => (process.env[n] || "").trim();
+  const to = env("CONTACT_TO");
+  const from = env("CONTACT_FROM");
+  const key = env("RESEND_API_KEY");
+
+  const missing = ["CONTACT_TO", "CONTACT_FROM", "RESEND_API_KEY"].filter(n => !env(n));
+  if (missing.length) return res.status(501).json({ error: "not-configured", missing });
 
   const text = `${message}\n\n—\n${name}\n${email}`;
   const html =
@@ -74,12 +79,15 @@ module.exports = async function handler(req, res) {
     });
 
     if (!sent.ok) {
-      console.error("resend " + sent.status + ": " + (await sent.text()).slice(0, 500));
-      return res.status(502).json({ error: "send-failed" });
+      const detail = (await sent.text()).slice(0, 500);
+      console.error("resend " + sent.status + ": " + detail);
+      /* The provider's status is enough to tell 401 (key) from 403 (unverified
+         sender) from 422 (bad payload) without opening the logs. */
+      return res.status(502).json({ error: "send-failed", provider: sent.status });
     }
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error("contact: " + err);
-    return res.status(502).json({ error: "send-failed" });
+    return res.status(502).json({ error: "send-failed", provider: "unreachable" });
   }
 };
