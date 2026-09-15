@@ -2,3 +2,6 @@ examples
 .claude
 tests
 node_modules
+.env
+.env.*
+.vercel
