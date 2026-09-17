@@ -974,6 +974,7 @@ a.rating:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
   column-gap: .4rem;
   row-gap: .1rem;
   margin-top: .35rem;
+  margin-left: -.8rem;     /* cancel the padding so the stars line up with the column */
   padding: .45rem .8rem;
   line-height: 1.35;
   border: 1px solid var(--footer-chip-bd);
