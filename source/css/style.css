@@ -966,36 +966,15 @@ a.rating:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
 :root[data-theme="dark"] .form__status[data-tone="ok"]  { color: #8fd6a6; }
 :root[data-theme="dark"] .form__status[data-tone="bad"] { color: #f0a49c; }
 
-/* Rate-us button: stars first, so it reads as a review link without being read. */
-.rate-btn {
-  display: inline-flex;
+/* Footer rating: a plain line, not a control — the link sits under it. */
+.footer-rating {
+  display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  column-gap: .4rem;
-  row-gap: .1rem;
-  margin-top: .35rem;
-  margin-left: -.8rem;     /* cancel the padding so the stars line up with the column */
-  padding: .45rem .8rem;
-  line-height: 1.35;
-  border: 1px solid var(--footer-chip-bd);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .04);
-  color: var(--footer-chip-fg);
-  font-size: .88rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: border-color .16s ease, background .16s ease, transform .16s ease;
+  gap: .4rem;
 }
 
-.rate-btn:hover {
-  transform: translateY(-1px);
-  border-color: var(--caramel);
-  background: rgba(255, 255, 255, .08);
-  color: var(--footer-fg-strong);
-}
-
-.rate-btn .rating__stars { font-size: .95rem; }
-.rate-btn__score { font-weight: 700; color: var(--footer-fg-strong); }
+.footer-rating__score { font-weight: 700; color: var(--footer-fg-strong); }
+.footer-rating .rating__stars { font-size: .95rem; }
 
 /* Review prompt */
 .review-line {
