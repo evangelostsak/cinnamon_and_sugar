@@ -514,8 +514,8 @@ p:last-child { margin-bottom: 0; }
 .rating {
   display: inline-flex;
   align-items: center;
-  gap: .6rem;
-  padding: .45rem .95rem .45rem .55rem;
+  gap: .5rem;
+  padding: .45rem .95rem;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--paper);
@@ -526,16 +526,51 @@ p:last-child { margin-bottom: 0; }
 }
 
 .rating__score {
-  display: grid;
-  place-items: center;
-  min-width: 2.35rem;
-  padding: .18rem .45rem;
-  border-radius: 999px;
-  background: var(--pistachio);
-  color: var(--on-accent);
   font-weight: 700;
-  font-size: .92rem;
+  font-size: 1.02rem;
+  color: var(--ink);
 }
+
+/* Two stacked rows of stars; the filled one is clipped to --fill. */
+.rating__stars {
+  position: relative;
+  display: inline-block;
+  font-size: 1.05rem;
+  line-height: 1;
+  letter-spacing: .06em;
+  color: var(--caramel-soft);
+}
+
+.rating__stars::before { content: "★★★★★"; }
+
+.rating__stars::after {
+  content: "★★★★★";
+  position: absolute;
+  inset: 0;
+  width: var(--fill, 100%);
+  overflow: hidden;
+  color: var(--caramel);
+  white-space: nowrap;
+}
+
+/* Score × 20. Inline styles are refused by the CSP, so the fill is a class. */
+.rating__stars[data-fill="100"] { --fill: 100%; }
+.rating__stars[data-fill="98"]  { --fill: 98%; }
+.rating__stars[data-fill="96"]  { --fill: 96%; }
+.rating__stars[data-fill="94"]  { --fill: 94%; }
+.rating__stars[data-fill="92"]  { --fill: 92%; }
+.rating__stars[data-fill="90"]  { --fill: 90%; }
+.rating__stars[data-fill="88"]  { --fill: 88%; }
+.rating__stars[data-fill="86"]  { --fill: 86%; }
+.rating__stars[data-fill="84"]  { --fill: 84%; }
+.rating__stars[data-fill="82"]  { --fill: 82%; }
+.rating__stars[data-fill="80"]  { --fill: 80%; }
+
+.rating__count { color: var(--ink-faint); font-size: .86rem; }
+.rating__count:empty { display: none; }
+
+a.rating { text-decoration: none; transition: box-shadow .16s ease, transform .16s ease; }
+a.rating:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
 /* Page banner (interior pages) */
 .banner {
