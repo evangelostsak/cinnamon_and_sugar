@@ -4,7 +4,7 @@
 
 "use strict";
 
-const LIMITS = { name: 120, email: 200, topic: 120, message: 4000 };
+const LIMITS = { name: 120, email: 200, message: 4000 };
 
 /* Rate limit. Serverless has no shared store, so this counts per warm instance:
    it blunts the ordinary case (one bot hammering the form) but is not a hard
@@ -57,10 +57,9 @@ const ACK = {
   de: {
     subject: "Wir haben deine Nachricht erhalten",
     greeting: name => `Hallo ${name},`,
-    body: topic =>
+    body: () =>
       "danke für deine Nachricht! Sie ist bei uns angekommen und wir melden uns " +
       "so schnell wie möglich bei dir.",
-    topicLabel: "Thema",
     urgent: "Für alles Dringende ruf uns bitte an:",
     signoff: "Bis bald,"
   },
@@ -70,7 +69,6 @@ const ACK = {
     body: () =>
       "thanks for writing! Your message reached us and someone will get back to " +
       "you shortly.",
-    topicLabel: "Subject",
     urgent: "For anything urgent, please call:",
     signoff: "See you soon,"
   },
@@ -80,7 +78,6 @@ const ACK = {
     body: () =>
       "ευχαριστούμε για το μήνυμά σου! Το λάβαμε και θα επικοινωνήσουμε μαζί σου " +
       "πολύ σύντομα.",
-    topicLabel: "Θέμα",
     urgent: "Για κάτι επείγον, τηλεφώνησέ μας:",
     signoff: "Τα λέμε σύντομα,"
   }
@@ -127,7 +124,6 @@ module.exports = async function handler(req, res) {
 
   const name = clean(body.name, LIMITS.name);
   const email = clean(body.email, LIMITS.email);
-  const topic = clean(body.topic, LIMITS.topic) || "Anfrage";
   const message = clean(body.message, LIMITS.message);
   const lang = ["de", "en", "el"].indexOf(clean(body.lang, 2)) >= 0 ? clean(body.lang, 2) : "de";
 
@@ -159,7 +155,7 @@ module.exports = async function handler(req, res) {
     const sent = await send({
       to: [to],
       reply_to: [email],
-      subject: `[${topic}] ${name}`,
+      subject: `Anfrage von ${name}`,
       text,
       html
     });
@@ -180,13 +176,11 @@ module.exports = async function handler(req, res) {
     const firstName = name.split(/\s+/)[0];
     const ackText =
       `${ack.greeting(firstName)}\n\n${ack.body()}\n\n` +
-      `${ack.topicLabel}: ${topic}\n\n` +
       `${ack.urgent} ${SHOP.phone}\n\n` +
       `${ack.signoff}\n${SHOP.name}\n${SHOP.address}\n${SHOP.site}`;
     const ackHtml =
       `<p>${escapeHtml(ack.greeting(firstName))}</p>` +
       `<p>${escapeHtml(ack.body())}</p>` +
-      `<p><strong>${escapeHtml(ack.topicLabel)}:</strong> ${escapeHtml(topic)}</p>` +
       `<p>${escapeHtml(ack.urgent)} <a href="tel:+493065863658">${SHOP.phone}</a></p>` +
       `<p>${escapeHtml(ack.signoff)}<br><strong>${escapeHtml(SHOP.name)}</strong><br>` +
       `${escapeHtml(SHOP.address)}<br><a href="${SHOP.site}">${SHOP.site}</a></p>`;
