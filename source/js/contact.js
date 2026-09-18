@@ -23,7 +23,7 @@
     var body = data.message + "\n\n—\n" + data.name + "\n" + data.email;
     window.location.href =
       "mailto:" + form.dataset.mailto +
-      "?subject=" + encodeURIComponent("[" + data.topic + "] " + data.name) +
+      "?subject=" + encodeURIComponent("Anfrage von " + data.name) +
       "&body=" + encodeURIComponent(body);
   }
 
@@ -39,7 +39,6 @@
     var data = {
       name: raw.get("name") || "",
       email: raw.get("email") || "",
-      topic: raw.get("topic") || "",
       message: raw.get("message") || "",
       company: raw.get("company") || "",    // honeypot
       lang: document.documentElement.lang || "de"
