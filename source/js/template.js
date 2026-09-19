@@ -16,10 +16,8 @@
   var FALLBACK = "en";      // dictionary consulted when a key is missing
   var DEFAULT = "de";       // what a first-time visitor sees
 
-  /* Greek isn't in the Fraunces/Karla subsets, so pull faces that cover it. */
-  var GREEK_FONTS =
-    "https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700" +
-    "&family=Manrope:wght@400;500;600;700&display=swap";
+  /* Greek glyphs; Fraunces and Karla have none. */
+  var GREEK_FONTS = "source/css/fonts-greek.css";
 
   var dicts = {};
   var activeDict = {};   // last applied, so the theme toggle can relabel
