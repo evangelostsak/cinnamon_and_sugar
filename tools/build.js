@@ -10,7 +10,7 @@ const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
 const SRC = path.join(ROOT, "source");
-const PAGES = ["index", "menu", "about", "contact"];
+const PAGES = ["index", "menu", "about", "contact", "impressum", "datenschutz"];
 const DEFAULT_LANG = "de";
 const FALLBACK_LANG = "en";
 
