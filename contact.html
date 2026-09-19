@@ -11,11 +11,8 @@
 
   <link rel="icon" type="image/png" href="source/images/favicon.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&amp;family=Karla:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="source/css/style.css?v=22">
+  <link rel="stylesheet" href="source/css/style.css?v=23">
 
   <script>
     /* Set the theme before first paint. */
@@ -295,6 +292,12 @@
         <span data-i18n="contact.we-usually-reply-within-a-day">Wir antworten meist innerhalb eines Tages. Für alles Dringende ruf uns bitte an:</span>
         <a href="tel:+493065863658">+49 30 65863658</a>
       </p>
+
+      <!-- Art. 13 DSGVO: the notice has to be reachable where the data is given. -->
+      <p class="form__note" data-i18n-skip>
+        <span data-i18n="contact.how-we-handle-your-message">Wie wir mit deiner Nachricht umgehen:</span>
+        <a href="datenschutz.html" data-i18n="base.privacy">Datenschutz</a>
+      </p>
     </form>
   </div>
 </section>
@@ -379,7 +382,11 @@
     </div>
 
     <div class="footer__bar">
-      <span data-i18n="base.year-cinnamon-and-sugar-all-rights">© 2026 Cinnamon &amp; Sugar. Alle Rechte vorbehalten.</span>
+      <span data-i18n-skip>
+        <span data-i18n="base.year-cinnamon-and-sugar-all-rights">© 2026 Cinnamon &amp; Sugar. Alle Rechte vorbehalten.</span>
+        <a class="footer__legal" href="impressum.html" data-i18n="base.impressum">Impressum</a>
+        <a class="footer__legal" href="datenschutz.html" data-i18n="base.privacy">Datenschutz</a>
+      </span>
       <span data-i18n-skip>
         <span data-i18n="base.delivery-and-pickup-via">Lieferung &amp; Abholung über</span>
         <a href="https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar" target="_blank" rel="noopener" data-i18n="common.wolt">Wolt</a>
@@ -395,6 +402,6 @@
 </footer>
 
 <!-- /build:content -->
-  <script src="source/js/template.js?v=22" data-page="contact" data-root="source/"></script>
+  <script src="source/js/template.js?v=23" data-page="contact" data-root="source/"></script>
 </body>
 </html>
