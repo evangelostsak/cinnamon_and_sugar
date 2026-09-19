@@ -22,13 +22,15 @@
 | **Order** | [Wolt](https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar) · [Uber Eats](https://www.ubereats.com/de-en/store/coffee-%26-bakery-cinnamon-and-sugar/b0k5kIpiRRClQ3yqFfLjxg) |
 | **Follow** | [Instagram](https://www.instagram.com/greek_coffee_bakery/) · [Facebook](https://www.facebook.com/p/Cinnamon-and-Sugar-100090695405160/) · [TikTok](https://www.tiktok.com/@cinnamon.and.suga8) |
 
-Four static pages, 60 menu items, German / English / Greek, dark mode. No
-framework and no database; the only server-side code emails the contact form.
+Four content pages plus Impressum and Datenschutz, 60 menu items,
+German / English / Greek, dark mode. No framework, no database and no
+third-party assets; the only server-side code emails the contact form.
 
 ## Structure
 
 ```
-index.html  menu.html  about.html  contact.html   ← build output, committed
+index.html  menu.html  about.html  contact.html
+impressum.html  datenschutz.html                  ← all six are build output, committed
 
 api/contact.js     emails the enquiry form
 tools/build.js     the prerenderer
@@ -37,7 +39,9 @@ vercel.json        build command, headers, redirects
 source/
   pages/base.html  shared navbar + footer   ← edit once, all pages follow
   pages/*.html     page content
-  css/style.css    design tokens at the top
+  css/style.css    @font-face rules, then design tokens
+  css/fonts-greek.css  injected only when the language is Greek
+  fonts/           self-hosted woff2 + OFL licence
   js/template.js   language, theme, nav, photos
   js/contact.js    the enquiry form
   i18n/*.json      de (default) · en (fallback) · el
@@ -75,6 +79,10 @@ visitor's mail app.
 
 Menu item names and descriptions carry no `data-i18n` key — they stay exactly as
 written, in any language.
+
+`impressum.html` and `datenschutz.html` are German only: it is the language the
+business trades in, and a translation that drifts out of step is worse than none.
+Both still carry `[placeholders]` that need the legal entity's details.
 
 Photos are matched by slug: lowercase, accents flattened, non-alphanumerics to
 hyphens. `Freddo Espresso 0,3 l` → `freddo-espresso-0-3-l.jpg`. Missing files show
@@ -114,6 +122,18 @@ beyond the contact form is configured in the dashboard, not here.
 - WAF **rate limiting** is a paid add-on — the in-function limit above covers the
   common case without it
 - Set a spend limit under Billing so an attack cannot run up a bill
+
+## Fonts
+
+Fraunces, Karla, Noto Serif and Manrope are served from `source/fonts/`, not from
+Google. That is deliberate: loading them from Google sends every visitor's IP
+address to a third country before they can object, which German courts have
+treated as a GDPR breach.
+
+Only the Latin subsets load by default. Noto Serif and Manrope exist purely to
+supply Greek glyphs that Fraunces and Karla lack, so the browser fetches them
+only on a Greek page. To change a weight or family, regenerate the `@font-face`
+block at the top of `style.css` and drop the new woff2 into `source/fonts/`.
 
 ## Deploy
 
