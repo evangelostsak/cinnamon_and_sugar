@@ -137,19 +137,24 @@ block at the top of `style.css` and drop the new woff2 into `source/fonts/`.
 
 ## Deploy
 
-Runs on either host from the same tree; each ignores the other's files.
+Cloudflare Pages is the target; Vercel still builds from the same tree so the two
+can run side by side until DNS moves. Each host ignores the other's files.
 
-| | Vercel | Cloudflare Pages |
+| | Cloudflare Pages | Vercel |
 | --- | --- | --- |
-| Build command | `node tools/build.js` | `node tools/build.js --host=cloudflare` |
+| Build command | `node tools/build.js` | `node tools/build.js --host=vercel` |
 | Output directory | repository root | repository root |
-| Function | `api/contact.js` | `functions/api/contact.js` |
-| Config | `vercel.json` | `_headers`, `_redirects` |
-| Analytics | script tag in the page | injected at the edge, enable in the dashboard |
+| Function | `functions/api/contact.js` | `api/contact.js` |
+| Config | `_headers`, `_redirects` | `vercel.json` |
+| Analytics | injected at the edge | script tag in the page |
 
 `vercel.json` is the source of truth: `tools/build.js` generates `_headers` and
 `_redirects` from it, so the two cannot drift. Edit `vercel.json`, never the
 generated files.
+
+URLs are extensionless — `/menu`, not `/menu.html`. Cloudflare Pages enforces this
+and cannot be turned off, so Vercel is set to `cleanUrls: true` to match. Both
+hosts 308 the old `.html` form to the new one, so existing links keep working.
 
 The CSP allows one inline script — the pre-paint theme script — by SHA-256 hash.
 The build recomputes it and exits non-zero if the committed hash is stale, which
@@ -161,13 +166,30 @@ Set `CONTACT_TO`, `CONTACT_FROM` and `RESEND_API_KEY` on whichever host is live.
 ### Testing the Cloudflare build locally
 
 ```bash
-node tools/build.js --host=cloudflare
+node tools/build.js
 npx wrangler pages dev . --port 8200
 ```
 
 Put the three contact variables in `.dev.vars` (gitignored). This runs the real
-Workers runtime, so `_headers`, `_redirects` and the function behave as they will
-in production.
+Workers runtime, so `_headers`, `_redirects`, the 404 and the function behave as
+they will in production.
+
+### Finishing the migration
+
+Pointing the apex at Pages needs Cloudflare to run DNS — IONOS has no ALIAS
+record, so an apex CNAME is impossible there. That means a nameserver change, and
+every existing record has to be recreated in Cloudflare **first**:
+
+| Record | Value | Breaks if lost |
+| --- | --- | --- |
+| TXT `@` | `google-site-verification=…` | Search Console unverifies |
+| TXT `_dmarc` | `v=DMARC1; p=none;` | deliverability |
+| TXT `send` | `v=spf1 include:amazonses.com ~all` | Resend mail lands in spam |
+| MX `send` | `feedback-smtp.eu-west-1.amazonses.com` | Resend bounce handling |
+| TXT `resend._domainkey` | DKIM key | Resend signing fails |
+
+Only once the domain resolves through Cloudflare and the site is verified should
+`api/`, `vercel.json` and the Vercel project be removed.
 
 ---
 
