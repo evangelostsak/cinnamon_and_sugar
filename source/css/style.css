@@ -1,5 +1,62 @@
 /* Cinnamon & Sugar — single stylesheet for the whole site. */
 
+/* Self-hosted: no visitor data reaches Google. SIL OFL 1.1 — see OFL.txt. */
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/fraunces-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/fraunces-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/fraunces-normal-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/fraunces-normal-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/karla-normal-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/karla-normal-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
 /* Design tokens */
 :root {
   /* Palette — warm bakery: cream, crust, cinnamon, caramel */
@@ -975,6 +1032,42 @@ a.rating:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
 .footer-rating__score { font-weight: 700; color: var(--footer-fg-strong); }
 .footer-rating .rating__stars { font-size: .95rem; }
+
+/* Legal pages */
+.legal h2 {
+  margin: 2.2rem 0 .6rem;
+  font-size: 1.15rem;
+}
+
+.legal h2:first-of-type { margin-top: 0; }
+.legal p { margin: 0 0 .9rem; }
+
+.legal__list {
+  margin: 0 0 1.1rem;
+  display: grid;
+  gap: .35rem;
+}
+
+.legal__list > div { display: flex; gap: .6rem; flex-wrap: wrap; }
+.legal__list dt { min-width: 7rem; font-weight: 600; color: var(--ink); }
+.legal__list dd { margin: 0; color: var(--ink-soft); }
+
+.legal__note {
+  padding: .7rem .95rem;
+  border-left: 3px solid var(--caramel);
+  background: var(--cream-deep);
+  font-size: .92rem;
+  color: var(--ink-soft);
+}
+
+.legal__meta {
+  margin-top: 2.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+  font-size: .92rem;
+}
+
+.footer__legal { margin-left: .9rem; }
 
 /* Review prompt */
 .review-line {

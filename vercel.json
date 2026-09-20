@@ -1,7 +1,7 @@
 {
-  "buildCommand": "node tools/build.js",
+  "buildCommand": "node tools/build.js --host=vercel",
   "outputDirectory": ".",
-  "cleanUrls": false,
+  "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
     {
@@ -16,7 +16,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'sha256-fiaIQZm8I5rbNkshZPeROGU2sYNmiZCNIGv6QyH9OL0='; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; frame-src https://www.openstreetmap.org; connect-src 'self'; form-action 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' 'sha256-fiaIQZm8I5rbNkshZPeROGU2sYNmiZCNIGv6QyH9OL0='; style-src 'self'; font-src 'self'; img-src 'self'; frame-src https://www.openstreetmap.org; connect-src 'self'; form-action 'self'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
         },
         {
           "key": "X-Content-Type-Options",
@@ -49,11 +49,11 @@
       ]
     },
     {
-      "source": "/(.*)\\.html",
+      "source": "/source/fonts/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     },
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "source": "/(api|tools|source/pages)/(.*)",
+      "source": "/(api|functions|tools|source/pages)/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",

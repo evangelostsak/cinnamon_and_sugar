@@ -6,3 +6,5 @@ node_modules
 .env.*
 .vercel
 .agents
+.dev.vars
+.wrangler
