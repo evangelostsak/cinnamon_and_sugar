@@ -28,6 +28,9 @@
 /api/*
   X-Robots-Tag: noindex
 
+/functions/*
+  X-Robots-Tag: noindex
+
 /tools/*
   X-Robots-Tag: noindex
 
