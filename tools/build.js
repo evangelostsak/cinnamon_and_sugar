@@ -15,7 +15,7 @@ const PAGES = ["index", "menu", "about", "contact", "impressum", "datenschutz", 
 /* Each host serves its own analytics. Vercel needs the tag in the page;
    Cloudflare injects its beacon at the edge once Web Analytics is switched on,
    so emitting Vercel's tag there would 404 on every single page load. */
-const HOST = (process.argv.find(a => a.startsWith("--host=")) || "").slice(7) || "vercel";
+const HOST = (process.argv.find(a => a.startsWith("--host=")) || "").slice(7) || "cloudflare";
 const ANALYTICS = {
   vercel: '  <!-- Vercel Web Analytics; 404s anywhere but Vercel. -->\n' +
           '  <script defer src="/_vercel/insights/script.js"></script>',
