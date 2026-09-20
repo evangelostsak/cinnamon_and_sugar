@@ -178,16 +178,21 @@
   "menu.speisekarte": "Speisekarte",
   "menu.the-menu": "The menu",
   "menu.toasted-brioche-bread": "Toasted brioche bread",
+  "meta.desc.404": "This page does not exist. Back to the Cinnamon & Sugar menu.",
   "meta.desc.about": "The story behind Cinnamon & Sugar, a small family-run Greek bakery and coffee shop in Prenzlauer Berg, Berlin.",
   "meta.desc.contact": "Find Cinnamon & Sugar, a small family-run bakery, at Lychener Straße 63, 10437 Berlin. Opening hours, phone number, map and delivery info.",
   "meta.desc.datenschutz": "How Cinnamon & Sugar handles the data processed when you visit this website.",
   "meta.desc.impressum": "Legal notice for Cinnamon & Sugar, Lychener Straße 63, 10437 Berlin.",
   "meta.desc.index": "A small family-run Greek bakery and coffee shop on Lychener Straße 63, Berlin. Bougatsa, fresh bagels, brioche sandwiches and freddo espresso, baked fresh every morning.",
   "meta.desc.menu": "The full Cinnamon & Sugar menu: brioche sandwiches, bagels, bougatsa, cakes, hot coffee, freddo and cold drinks.",
+  "meta.title.404": "Page not found — Cinnamon & Sugar",
   "meta.title.about": "About — Cinnamon & Sugar",
   "meta.title.contact": "Contact — Cinnamon & Sugar",
   "meta.title.datenschutz": "Privacy policy — Cinnamon & Sugar",
   "meta.title.impressum": "Imprint — Cinnamon & Sugar",
   "meta.title.index": "Cinnamon & Sugar — Bakery & Coffee in Prenzlauer Berg, Berlin",
-  "meta.title.menu": "Menu — Cinnamon & Sugar"
+  "meta.title.menu": "Menu — Cinnamon & Sugar",
+  "notfound.back-to-the-start": "Back to the start",
+  "notfound.page-not-found": "Page not found",
+  "notfound.that-page-has-moved-or-never": "That page has moved or never existed. The menu is still where you left it."
 }
