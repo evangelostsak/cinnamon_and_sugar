@@ -1,7 +1,7 @@
 {
-  "buildCommand": "node tools/build.js",
+  "buildCommand": "node tools/build.js --host=vercel",
   "outputDirectory": ".",
-  "cleanUrls": false,
+  "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
     {
@@ -45,15 +45,6 @@
         {
           "key": "X-DNS-Prefetch-Control",
           "value": "off"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.html",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
         }
       ]
     },
