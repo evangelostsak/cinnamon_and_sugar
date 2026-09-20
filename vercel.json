@@ -85,7 +85,7 @@
       ]
     },
     {
-      "source": "/(api|tools|source/pages)/(.*)",
+      "source": "/(api|functions|tools|source/pages)/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
