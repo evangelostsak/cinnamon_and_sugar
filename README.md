@@ -137,9 +137,37 @@ block at the top of `style.css` and drop the new woff2 into `source/fonts/`.
 
 ## Deploy
 
-Vercel, from `main`. Build command `node tools/build.js`, output at the repository
-root. `vercel.json` sets a CSP plus the usual security headers; inline scripts are
-allowed by hash, and the build fails if that hash is stale.
+Runs on either host from the same tree; each ignores the other's files.
+
+| | Vercel | Cloudflare Pages |
+| --- | --- | --- |
+| Build command | `node tools/build.js` | `node tools/build.js --host=cloudflare` |
+| Output directory | repository root | repository root |
+| Function | `api/contact.js` | `functions/api/contact.js` |
+| Config | `vercel.json` | `_headers`, `_redirects` |
+| Analytics | script tag in the page | injected at the edge, enable in the dashboard |
+
+`vercel.json` is the source of truth: `tools/build.js` generates `_headers` and
+`_redirects` from it, so the two cannot drift. Edit `vercel.json`, never the
+generated files.
+
+The CSP allows one inline script — the pre-paint theme script — by SHA-256 hash.
+The build recomputes it and exits non-zero if the committed hash is stale, which
+fails the deploy rather than shipping a page whose theme script the browser
+refuses to run.
+
+Set `CONTACT_TO`, `CONTACT_FROM` and `RESEND_API_KEY` on whichever host is live.
+
+### Testing the Cloudflare build locally
+
+```bash
+node tools/build.js --host=cloudflare
+npx wrangler pages dev . --port 8200
+```
+
+Put the three contact variables in `.dev.vars` (gitignored). This runs the real
+Workers runtime, so `_headers`, `_redirects` and the function behave as they will
+in production.
 
 ---
 
