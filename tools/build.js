@@ -10,7 +10,7 @@ const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
 const SRC = path.join(ROOT, "source");
-const PAGES = ["index", "menu", "about", "contact", "impressum", "datenschutz"];
+const PAGES = ["index", "menu", "about", "contact", "impressum", "datenschutz", "404"];
 
 /* Each host serves its own analytics. Vercel needs the tag in the page;
    Cloudflare injects its beacon at the edge once Web Analytics is switched on,
