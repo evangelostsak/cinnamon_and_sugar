@@ -178,16 +178,21 @@
   "menu.speisekarte": "Κατάλογος",
   "menu.the-menu": "Ο κατάλογος",
   "menu.toasted-brioche-bread": "Ψημένο ψωμί brioche",
+  "meta.desc.404": "Αυτή η σελίδα δεν υπάρχει. Πίσω στον κατάλογο του Cinnamon & Sugar.",
   "meta.desc.about": "Η ιστορία του Cinnamon & Sugar, ενός μικρού οικογενειακού ελληνικού αρτοποιείου και καφέ στο Prenzlauer Berg του Βερολίνου.",
   "meta.desc.contact": "Το Cinnamon & Sugar, ένα μικρό οικογενειακό αρτοποιείο, στη Lychener Straße 63, 10437 Βερολίνο. Ωράριο, τηλέφωνο, χάρτης και πληροφορίες παράδοσης.",
   "meta.desc.datenschutz": "Πώς διαχειρίζεται το Cinnamon & Sugar τα δεδομένα κατά την επίσκεψη σε αυτόν τον ιστότοπο.",
   "meta.desc.impressum": "Νομικές πληροφορίες για το Cinnamon & Sugar, Lychener Straße 63, 10437 Βερολίνο.",
   "meta.desc.index": "Μικρό οικογενειακό ελληνικό αρτοποιείο και καφέ στη Lychener Straße 63, Βερολίνο. Μπουγάτσα, φρέσκα bagels, brioche sandwiches και φρέντο εσπρέσο, φρέσκα κάθε πρωί.",
   "meta.desc.menu": "Ο πλήρης κατάλογος του Cinnamon & Sugar: brioche sandwiches, bagels, μπουγάτσα, γλυκά, ζεστός καφές, φρέντο και κρύα ροφήματα.",
+  "meta.title.404": "Η σελίδα δεν βρέθηκε — Cinnamon & Sugar",
   "meta.title.about": "Σχετικά — Cinnamon & Sugar",
   "meta.title.contact": "Επικοινωνία — Cinnamon & Sugar",
   "meta.title.datenschutz": "Πολιτική απορρήτου — Cinnamon & Sugar",
   "meta.title.impressum": "Impressum — Cinnamon & Sugar",
   "meta.title.index": "Cinnamon & Sugar — Αρτοποιείο & Καφές στο Prenzlauer Berg, Βερολίνο",
-  "meta.title.menu": "Κατάλογος — Cinnamon & Sugar"
+  "meta.title.menu": "Κατάλογος — Cinnamon & Sugar",
+  "notfound.back-to-the-start": "Πίσω στην αρχή",
+  "notfound.page-not-found": "Η σελίδα δεν βρέθηκε",
+  "notfound.that-page-has-moved-or-never": "Η σελίδα μετακινήθηκε ή δεν υπήρξε ποτέ. Ο κατάλογος είναι ακόμα εκεί που τον άφησες."
 }
