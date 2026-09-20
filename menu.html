@@ -7,7 +7,7 @@
   <title>Speisekarte — Cinnamon &amp; Sugar</title>
   <meta name="description" content="Die ganze Speisekarte von Cinnamon &amp; Sugar: Brioche-Sandwiches, Bagels, Bougatsa, Kuchen, heißer Kaffee, Freddo und kalte Getränke.">
 
-  <link rel="canonical" href="https://cinnamon-und-sugar.de/menu.html">
+  <link rel="canonical" href="https://cinnamon-und-sugar.de/menu">
 
   <link rel="icon" type="image/png" href="source/images/favicon.png">
 
@@ -30,8 +30,7 @@
   </script>
 
   <!-- build:analytics -->
-  <!-- Vercel Web Analytics; 404s anywhere but Vercel. -->
-  <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Cloudflare injects its analytics beacon at the edge. -->
   <!-- /build:analytics -->
 </head>
 <body>
@@ -43,7 +42,7 @@
 <!-- Sticky navbar -->
 <header class="nav" id="site-nav">
   <div class="shell nav__inner">
-    <a class="brand" href="index.html">
+    <a class="brand" href="/">
       <img class="brand__mark" src="source/images/logo.png" alt=""
            width="60" height="60"
            data-src-light="source/images/logo.png"
@@ -61,17 +60,17 @@
 
     <nav class="nav__menu" id="nav-menu" aria-label="Hauptnavigation" data-i18n-attr="aria-label:base.main">
       <ul class="nav__links">
-        <li><a class="nav__link" data-nav="index"   href="index.html" data-i18n="base.home">Start</a></li>
-        <li><a class="nav__link" data-nav="menu"    href="menu.html" data-i18n="base.menu">Speisekarte</a></li>
-        <li><a class="nav__link" data-nav="about"   href="about.html" data-i18n="base.about">Über uns</a></li>
-        <li><a class="nav__link" data-nav="contact" href="contact.html" data-i18n="base.contact">Kontakt</a></li>
+        <li><a class="nav__link" data-nav="index"   href="/" data-i18n="base.home">Start</a></li>
+        <li><a class="nav__link" data-nav="menu"    href="/menu" data-i18n="base.menu">Speisekarte</a></li>
+        <li><a class="nav__link" data-nav="about"   href="/about" data-i18n="base.about">Über uns</a></li>
+        <li><a class="nav__link" data-nav="contact" href="/contact" data-i18n="base.contact">Kontakt</a></li>
         <li class="lang" role="group" aria-label="Sprache ändern" data-i18n-attr="aria-label:base.change-language">
           <button type="button" class="lang__btn" data-lang="de" aria-pressed="false" data-i18n="base.de">DE</button>
           <button type="button" class="lang__btn" data-lang="en" aria-pressed="false" data-i18n="base.en">EN</button>
           <button type="button" class="lang__btn" data-lang="el" aria-pressed="false" data-i18n="base.el">EL</button>
         </li>
         <li>
-          <a class="btn nav__cta" href="contact.html#order" data-i18n="base.order-online">Online bestellen</a>
+          <a class="btn nav__cta" href="/contact#order" data-i18n="base.order-online">Online bestellen</a>
         </li>
         <li>
           <button class="theme-toggle" type="button" aria-pressed="false"
@@ -785,7 +784,7 @@ Perfect for your breakfast !</p>
          target="_blank" rel="noopener" data-i18n="common.order-on-wolt">Auf Wolt bestellen</a>
       <a class="btn btn--light" href="https://www.ubereats.com/de-en/store/coffee-%26-bakery-cinnamon-and-sugar/b0k5kIpiRRClQ3yqFfLjxg"
          target="_blank" rel="noopener" data-i18n="common.order-on-uber-eats">Auf Uber Eats bestellen</a>
-      <a class="btn btn--ghost" href="contact.html" data-i18n="menu.find-the-shop">Laden finden</a>
+      <a class="btn btn--ghost" href="/contact" data-i18n="menu.find-the-shop">Laden finden</a>
     </div>
   </div>
 </section>
@@ -862,7 +861,7 @@ Perfect for your breakfast !</p>
         <ul>
           <li><a href="https://wolt.com/de/deu/berlin/restaurant/cinnamon-sugar" target="_blank" rel="noopener" data-i18n="common.wolt">Wolt</a></li>
           <li><a href="https://www.ubereats.com/de-en/store/coffee-%26-bakery-cinnamon-and-sugar/b0k5kIpiRRClQ3yqFfLjxg" target="_blank" rel="noopener" data-i18n="common.uber-eats">Uber Eats</a></li>
-          <li><a href="contact.html#order" data-i18n="common.delivery-and-pickup">Lieferung &amp; Abholung</a></li>
+          <li><a href="/contact#order" data-i18n="common.delivery-and-pickup">Lieferung &amp; Abholung</a></li>
         </ul>
       </div>
     </div>
@@ -870,8 +869,8 @@ Perfect for your breakfast !</p>
     <div class="footer__bar">
       <span data-i18n-skip>
         <span data-i18n="base.year-cinnamon-and-sugar-all-rights">© 2026 Cinnamon &amp; Sugar. Alle Rechte vorbehalten.</span>
-        <a class="footer__legal" href="impressum.html" data-i18n="base.impressum">Impressum</a>
-        <a class="footer__legal" href="datenschutz.html" data-i18n="base.privacy">Datenschutz</a>
+        <a class="footer__legal" href="/impressum" data-i18n="base.impressum">Impressum</a>
+        <a class="footer__legal" href="/datenschutz" data-i18n="base.privacy">Datenschutz</a>
       </span>
       <span data-i18n-skip>
         <span data-i18n="base.delivery-and-pickup-via">Lieferung &amp; Abholung über</span>
